@@ -1,16 +1,21 @@
-import React from "react";
-import { changeCells } from "../files/game.jsx";
+import React, { useContext } from "react";
+import { changeArray } from "../files/game.jsx";
+
+import { GridContext } from "../../contexts/GridContext.jsx";
 
 const Grid = (props) => {
-  // props = world, onChange
+  const { world, onChange } = props;
+
+  // const { world, onChange } = useContext(GridContext);
+
   console.log("Grid>props: ", props);
 
-  // const changeCell = (cell, x, y) => {
-  //   const { world } = props.world;
-  //   const row = changeCells(world[y], x, cell ? 0 : 1);
-  //   const newWorld = changeCells(world, y, row);
-  //   props.onChange(newWorld);
-  // };
+  const changeCell = (cell, x, y) => {
+    // const { world } = props;
+    const row = changeArray(world[y], x, cell ? 0 : 1);
+    const newWorld = changeArray(world, y, row);
+    onChange(newWorld);
+  };
 
   const renderCell = (cell, x, y) => {
     return (
@@ -18,6 +23,7 @@ const Grid = (props) => {
         key={x}
         className="cell"
         style={{ backgroundColor: cell ? "#424151" : null }}
+        onMouseDown={() => changeCell(cell, x, y)}
       />
     );
   };
@@ -31,7 +37,7 @@ const Grid = (props) => {
   return (
     <div className="grid">
       <h3>Grid</h3>
-      {props.world.map((row, y) => renderRow(row, y))}
+      {world.map((row, y) => renderRow(row, y))}
     </div>
   );
 };

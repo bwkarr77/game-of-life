@@ -5,6 +5,8 @@ import Presets from "./Presets.jsx";
 import { loadPreset } from "../files/presets.jsx";
 import { GEN_TIME, createWorld, nextGen } from "../files/game.jsx";
 
+// import { GridContext } from "../../contexts/GridContext.jsx";
+
 const Game = () => {
   const [state, setState] = useState({
     world: loadPreset("line"),
@@ -12,11 +14,13 @@ const Game = () => {
     playing: false,
   });
 
-  const changeState = (world, curGen) =>
+  const changeState = (world, nextGen) => {
+    // console.log("changeState: ", world, nextGen);
     setState({
       world: world,
-      generation: curGen,
+      generation: nextGen,
     });
+  };
 
   // Handler Functions
   const onChange = (world) => changeState(world, state.generation + 1);
@@ -26,8 +30,8 @@ const Game = () => {
   const onNext = () => onChange(nextGen(state.world));
 
   const onPlay = () => {
-    setState({ playing: true, interval: onNext(), GEN_TIME });
-    this.interval = setInterval(() => onNext(), GEN_TIME);
+    setState({ playing: true });
+    const interval = setInterval(() => onNext(), GEN_TIME);
   };
 
   const onStop = () => {
@@ -38,19 +42,21 @@ const Game = () => {
   console.log("GAME>state: ", state);
 
   return (
+    // <GridContext.Provider value={{ state, onChange, onClear }}>
     <div className="game">
       <h3>Game</h3>
       <Grid world={state.world} onChange={onChange} />
       <p>Generation: {state.generation}</p>
       <Controls
         clear={onClear}
-        onChange={onChange}
+        // onChange={onChange}
         playing={state.playing}
         play={onPlay}
         stop={onStop}
       />
       <Presets />
     </div>
+    // </GridContext.Provider>
   );
 };
 

@@ -10,11 +10,29 @@ export const createWorld = () => {
 };
 
 export const getNeighbors = (x, y) => {
-  return;
+  return [
+    [x, y + 1],
+    [x, y - 1],
+    [x - 1, y - 1],
+    [x - 1, y],
+    [x - 1, y + 1],
+    [x + 1, y - 1],
+    [x + 1, y],
+    [x + 1, y + 1],
+  ].filter(
+    (cell) =>
+      // if x and y of cell are greater than 0 and inside the world perimeter:
+      cell[0] >= 0 &&
+      cell[0] < WORLD_SIZE &&
+      cell[1] >= 0 &&
+      cell[1] < WORLD_SIZE
+  );
 };
 
 export const aliveNeighbors = (world, x, y) => {
-  return getNeighbors(x, y);
+  return getNeighbors(x, y).filter(
+    (living) => world[living[0]][living[1]] === ALIVE
+  ).length;
 };
 
 export const nextGen = (world) => {
@@ -30,8 +48,7 @@ export const nextGen = (world) => {
   return newWorld;
 };
 
-export const changeCells = (arr, i, value) => [
-  ...arr.slice(0, i),
-  value,
-  ...arr.slice(i + 1),
-];
+export const changeArray = (arr, i, value) => {
+  // console.log("changeArray: ", arr, i, value);
+  return [...arr.slice(0, i), value, ...arr.slice(i + 1)];
+};
