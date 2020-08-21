@@ -52,3 +52,9 @@ export const changeArray = (arr, i, value) => {
   // console.log("changeArray: ", arr, i, value);
   return [...arr.slice(0, i), value, ...arr.slice(i + 1)];
 };
+
+export const randomFill = (world) => {
+  // map through each cell from "world",
+  // fill each cell with a 1 or 0 (Math.round(Math.random()))
+  return world.map((row) => row.map((cell) => Math.round(Math.random())));
+};

@@ -25,19 +25,23 @@ const Game = () => {
   // Handler Functions
   const onChange = (world) => changeState(world, state.generation + 1);
 
+  // clears the grid
   const onClear = () => changeState(createWorld(), 0);
 
-  const onNext = () => onChange(nextGen(state.world));
-
+  // starts the generation creation
   const onPlay = () => {
     setState({ playing: true });
     const interval = setInterval(() => onNext(), GEN_TIME);
   };
 
+  // stops/pauses the generation creation
   const onStop = () => {
     setState({ playing: false });
     clearInterval(this.interval);
   };
+
+  // move to the next generation
+  const onNext = () => onChange(nextGen(state.world));
 
   console.log("GAME>state: ", state);
 
