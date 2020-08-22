@@ -46,3 +46,7 @@ p > span {
 .cell:hover {
   background-color: #bcbcc1;
 }
+
+.label_grid {
+  width: 50px;
+}

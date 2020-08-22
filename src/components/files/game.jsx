@@ -1,7 +1,18 @@
-export const WORLD_SIZE = 70; //make this changeable
-export const GEN_TIME = 100; //milliseconds until next generation
+export let WORLD_SIZE = 70; //make this changeable
+export let GEN_TIME = 100; //milliseconds until next generation
 export const ALIVE = 1;
 export const DEAD = 0;
+
+export const getWorldSize = (gridSize) => {
+  console.log("getWorldSize: ", gridSize, WORLD_SIZE);
+  WORLD_SIZE = gridSize;
+  return WORLD_SIZE;
+};
+
+export const getSpeed = (genSpeed) => {
+  GEN_TIME = genSpeed;
+  return GEN_TIME;
+};
 
 export const createWorld = () => {
   return Array(WORLD_SIZE)
@@ -36,6 +47,7 @@ export const aliveNeighbors = (world, x, y) => {
 };
 
 export const nextGen = (world) => {
+  // console.log("nextGen: ", world);
   let newWorld = createWorld();
   for (let x = 0; x < WORLD_SIZE; x++) {
     for (let y = 0; y < WORLD_SIZE; y++) {

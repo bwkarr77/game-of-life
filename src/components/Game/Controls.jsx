@@ -1,8 +1,9 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
+// install semantic-ui-css as well
 
 const Controls = (props) => {
-  console.log("Controls>props: ", props);
+  // console.log("Controls>props: ", props);
   return (
     <div>
       <div className="controls">

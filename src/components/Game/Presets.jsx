@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown, Button } from "semantic-ui-react";
+// install semantic-ui-css as well
 
 import { presetOptions } from "../files/presets.jsx";
 
@@ -12,7 +13,7 @@ const Presets = (props) => {
     return preset ? load(preset) : null;
   };
 
-  console.log("Presets: ", preset, presetOptions);
+  // console.log("Presets: ", preset, presetOptions);
   return (
     <div className="controls">
       <Button as="div" labelPosition="left">
@@ -22,6 +23,7 @@ const Presets = (props) => {
           options={presetOptions}
           selection
           className="label"
+          disabled={playing}
           value={preset}
           onChange={(e, { value }) => {
             console.log("Presets.jsx:onChange: ", value);

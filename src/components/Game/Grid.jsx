@@ -8,7 +8,7 @@ const Grid = (props) => {
 
   // const { world, onChange } = useContext(GridContext);
 
-  console.log("Grid>props: ", props);
+  // console.log("Grid>props: ", props.world);
 
   const changeCell = (cell, x, y) => {
     // const { world } = props;

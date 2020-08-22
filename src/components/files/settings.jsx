@@ -1,20 +1,43 @@
-import { ALIVE, WORLD_SIZE, createWorld } from "./game";
-
 export const colorOptions = [
   { key: "greyMode", value: "greyMode", text: "greyMode" },
   { key: "dayMode", value: "dayMode", text: "dayMode" },
   { key: "darkMode", value: "darkMode", text: "darkMode" },
-  // { key: "randomColor", value: "randomColor", text: "randomColor" },
-  // { key: "pulsar", value: "pulsar", text: "Pulsar" },
-  // { key: "diehard", value: "diehard", text: "Diehard" },
-  // { key: "gliderGun", value: "gliderGun", text: "Gosper Glider Gun" },
-  // { key: "infiniteGrowth", value: "infiniteGrowth", text: "Infinite Growth" },
 ];
 
-export const loadColorStyling = (preset) => {
-  let newWorld = createWorld();
-  // console.log("presets.jsx>loadPreset", newWorld);
-  switch (preset) {
+export const gridSizeOptions = [
+  { key: "25", value: 25, text: "25" },
+  { key: "30", value: 30, text: "30" },
+  { key: "35", value: 35, text: "35" },
+  { key: "40", value: 40, text: "40" },
+  { key: "45", value: 45, text: "45" },
+  { key: "50", value: 50, text: "50" },
+  { key: "55", value: 55, text: "55" },
+  { key: "60", value: 60, text: "60" },
+  { key: "65", value: 65, text: "65" },
+  { key: "70", value: 70, text: "70" },
+  { key: "75", value: 75, text: "75" },
+  { key: "80", value: 80, text: "80" },
+  { key: "85", value: 85, text: "85" },
+  { key: "90", value: 90, text: "90" },
+  { key: "95", value: 95, text: "95" },
+  { key: "100", value: 100, text: "100" },
+  { key: "125", value: 125, text: "125" },
+  { key: "150", value: 150, text: "150" },
+  { key: "200", value: 200, text: "200" },
+];
+
+export const generationSpeed = [
+  { key: "10", value: 10, text: "10" },
+  { key: "25", value: 25, text: "25" },
+  { key: "50", value: 50, text: "50" },
+  { key: "90", value: 90, text: "90" },
+  { key: "100", value: 100, text: "100" },
+  { key: "500", value: 500, text: "500" },
+  { key: "1000", value: 1000, text: "1000" },
+];
+
+export const loadColorStyling = (colorStyle) => {
+  switch (colorStyle) {
     case "greyMode":
       return greyMode();
     case "darkMode":
@@ -24,8 +47,12 @@ export const loadColorStyling = (preset) => {
     case "randomColor":
       return randomColor();
     default:
-      return newWorld;
+      return "greyMode";
   }
+};
+
+export const loadGridSizeG = (size) => {
+  return size;
 };
 
 const greyMode = (world, half) => {
@@ -42,26 +69,4 @@ const randomColor = (world, half) => {
 
 const darkMode = (world, startX, startY) => {
   // styling = dark mode colors
-};
-
-const pulsar = (world) => {
-  return world;
-};
-
-const diehard = (world) => {
-  return world;
-};
-
-const gliderGun = (world) => {
-  return world;
-};
-
-const infiniteGrowth = (world, half) => {
-  const x = half - 20;
-  world[half].splice(x, 8, 1, 1, 1, 1, 1, 1, 1, 1);
-  world[half].splice(x + 9, 5, 1, 1, 1, 1, 1);
-  world[half].splice(x + 17, 3, 1, 1, 1);
-  world[half].splice(x + 26, 7, 1, 1, 1, 1, 1, 1, 1);
-  world[half].splice(x + 34, 5, 1, 1, 1, 1, 1);
-  return world;
 };
