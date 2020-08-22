@@ -1,17 +1,17 @@
 import React from "react";
 import "./App.css";
-import Title from "./components/Title.jsx";
-import Game from "./components/Game/Game.jsx";
 import GameClass from "./components/Game/GameClass.jsx";
-import { Divider } from "semantic-ui-react";
+import { Divider, Header } from "semantic-ui-react";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Title />
-        {/* <Divider /> */}
-        {/* <Game /> */}
+        <Header as="h2" textAlign="center" className="title">
+          Game Of Life
+          <Header.Subheader>John Conway</Header.Subheader>
+        </Header>
+        <Divider />
         <GameClass />
       </header>
     </div>

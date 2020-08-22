@@ -5,14 +5,7 @@ const Controls = (props) => {
   console.log("Controls>props: ", props);
   return (
     <div>
-      Controls
       <div className="controls">
-        {!props.playing ? (
-          <Button content="Play" icon="redo" onClick={props.play} />
-        ) : (
-          <Button content="Stop" icon="redo" onClick={props.stop} />
-        )}
-        <Button content="Clear" icon="redo" onClick={props.clear} />
         <Button
           content="Shuffle"
           icon="random"
@@ -32,6 +25,11 @@ const Controls = (props) => {
           labelPosition="right"
           onClick={props.next}
         />
+        {!props.playing ? (
+          <Button content="Play" icon="redo" onClick={props.play} />
+        ) : (
+          <Button content="Stop" icon="redo" onClick={props.stop} />
+        )}
       </div>
     </div>
   );

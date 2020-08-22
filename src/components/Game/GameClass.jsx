@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Controls from "./Controls.jsx";
 import Grid from "./Grid.jsx";
 import Presets from "./Presets.jsx";
-// import Presets from "./PresetsClass.jsx";
+import Settings from "./Settings.jsx";
 import { loadPreset } from "../files/presets.jsx";
+import { loadColorStyling } from "../files/settings.jsx";
 import { GEN_TIME, createWorld, nextGen, randomFill } from "../files/game.jsx";
 
 // import { GridContext } from "../../contexts/GridContext.jsx";
@@ -13,6 +14,7 @@ class Game extends React.Component {
     world: loadPreset("cross"),
     generation: 0,
     playing: false,
+    colorStyle: loadColorStyling("greyColor"),
   };
 
   changeState = (world, nextGen) => {
@@ -50,14 +52,14 @@ class Game extends React.Component {
   // randomly fills the board
   onShuffle = () => this.changeState(randomFill(this.state.world), 0);
 
-  //
+  // loads color styling
+  onColorStyle = (colorStyle) => this.changeState(loadColorStyling(colorStyle));
 
   render() {
     // console.log("GAME>state: ", this.state.world[69].length);
     return (
       // <GridContext.Provider value={{ state, onChange, onClear }}>
       <div className="game">
-        <h3>Game</h3>
         <Grid world={this.state.world} onChange={this.onChange} />
         <p>Generation: {this.state.generation}</p>
         <Controls
@@ -69,6 +71,7 @@ class Game extends React.Component {
           next={this.onNext}
         />
         <Presets load={this.onPreset} playing={this.state.playing} />
+        <Settings playing={this.state.playing} load={this.onColorStyle} />
       </div>
       // </GridContext.Provider>
     );

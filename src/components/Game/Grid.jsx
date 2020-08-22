@@ -34,12 +34,7 @@ const Grid = (props) => {
     </div>
   );
 
-  return (
-    <div className="grid">
-      <h3>Grid</h3>
-      {world.map((row, y) => renderRow(row, y))}
-    </div>
-  );
+  return <div className="grid">{world.map((row, y) => renderRow(row, y))}</div>;
 };
 
 export default Grid;

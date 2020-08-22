@@ -4,6 +4,7 @@ import Grid from "./Grid.jsx";
 import Presets from "./Presets.jsx";
 import { loadPreset } from "../files/presets.jsx";
 import { GEN_TIME, createWorld, nextGen } from "../files/game.jsx";
+import { Header } from "semantic-ui-react";
 
 // import { GridContext } from "../../contexts/GridContext.jsx";
 
@@ -48,7 +49,6 @@ const Game = () => {
   return (
     // <GridContext.Provider value={{ state, onChange, onClear }}>
     <div className="game">
-      <h3>Game</h3>
       <Grid world={state.world} onChange={onChange} />
       <p>Generation: {state.generation}</p>
       <Controls

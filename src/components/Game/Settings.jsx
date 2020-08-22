@@ -1,31 +1,30 @@
 import React, { useState } from "react";
 import { Dropdown, Button } from "semantic-ui-react";
 
-import { presetOptions } from "../files/presets.jsx";
+import { colorOptions } from "../files/settings.jsx";
 
-const Presets = (props) => {
+const Settings = (props) => {
   const { load, playing } = props;
 
-  const [preset, setPreset] = useState("line");
+  const [colors, setColors] = useState("greyMode");
 
   const onLoad = () => {
-    return preset ? load(preset) : null;
+    return colors ? colors : null;
   };
 
-  console.log("Presets: ", preset, presetOptions);
   return (
     <div className="controls">
       <Button as="div" labelPosition="left">
         <Dropdown
           // styling didn't work until I added <link rel='stylesheet" href='...'/> to the index.html file.
-          placeholder="Select a preset"
-          options={presetOptions}
+          placeholder="Color Theme"
+          options={colorOptions}
           selection
           className="label"
-          value={preset}
+          value={colors}
           onChange={(e, { value }) => {
-            console.log("Presets.jsx:onChange: ", value);
-            setPreset(`${value}`);
+            console.log("Settings.jsx:onChange: ", value);
+            setColors(`${value}`);
           }}
         />
         <Button content="Load" onClick={onLoad} disabled={playing} />
@@ -34,4 +33,4 @@ const Presets = (props) => {
   );
 };
 
-export default Presets;
+export default Settings;

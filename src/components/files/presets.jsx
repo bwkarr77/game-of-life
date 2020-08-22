@@ -3,12 +3,28 @@ import { ALIVE, WORLD_SIZE, createWorld } from "./game";
 export const presetOptions = [
   { key: "line", value: "line", text: "Line" },
   { key: "cross", value: "cross", text: "Cross" },
+  { key: "thickCross", value: "thickCross", text: "Thick Cross" },
   { key: "plus", value: "plus", text: "Plus" },
   { key: "glider", value: "glider", text: "Glider" },
   { key: "pulsar", value: "pulsar", text: "Pulsar" },
   { key: "diehard", value: "diehard", text: "Diehard" },
-  { key: "gliderGun", value: "gliderGun", text: "Gosper Glider Gun" },
+  {
+    key: "gliderGunSE",
+    value: "gliderGunSE",
+    text: "Gosper Glider Gun (SE)",
+  },
+  {
+    key: "gliderGunNE",
+    value: "gliderGunNE",
+    text: "Gosper Glider Gun (NE)",
+  },
+  {
+    key: "duelingGliderGuns",
+    value: "duelingGliderGuns",
+    text: "Gosper Gliders Dueling",
+  },
   { key: "infiniteGrowth", value: "infiniteGrowth", text: "Infinite Growth" },
+  { key: "testingPatterns", value: "testingPatterns", text: "testingPatterns" },
 ];
 
 export const loadPreset = (preset) => {
@@ -21,21 +37,95 @@ export const loadPreset = (preset) => {
     case "glider":
       return glider(newWorld, half);
     case "cross":
-      return cross(newWorld);
+      return cross(newWorld, half);
+    case "thickCross":
+      return thickCross(newWorld, half);
     case "plus":
       return plus(newWorld, half);
     case "pulsar":
       return pulsar(newWorld, half);
     case "diehard":
       return diehard(newWorld, half);
-    case "gliderGun":
-      return gliderGun(newWorld, half);
+    case "gliderGunSE":
+      return gliderGunSE(newWorld, half, 0, 0);
+    case "gliderGunNE":
+      return gliderGunNE(newWorld, half, 0, 0);
+    case "duelingGliderGuns":
+      return duelingGliderGuns(newWorld, half, 0, 0);
     case "infiniteGrowth":
       return infiniteGrowth(newWorld, half);
-
+    // case "testingPatterns":
+    //   return testingPatterns(newWorld, half);
     default:
       return newWorld;
   }
+};
+
+const toBlock = (world, x0, y0) => {
+  world[y0][x0] = ALIVE;
+  world[y0 - 1][x0] = ALIVE;
+  world[y0][x0 + 1] = ALIVE;
+  world[y0 - 1][x0 + 1] = ALIVE;
+  return world;
+};
+
+const toEgg = (world, y0, x0) => {
+  world[x0][y0] = ALIVE;
+  world[x0][y0 + 6] = ALIVE;
+  world[x0][y0 + 4] = ALIVE;
+  world[x0][y0 + 7] = ALIVE;
+  for (let i = 0; i < 3; i++) {
+    world[x0 + 1 + i][y0 + i] = ALIVE;
+    world[x0 - 1 - i][y0 + i] = ALIVE;
+  }
+  world[x0 + 3][y0 + 3] = ALIVE;
+  world[x0 + 2][y0 + 5] = ALIVE;
+  world[x0 + 1][y0 + 6] = ALIVE;
+  world[x0 - 3][y0 + 3] = ALIVE;
+  world[x0 - 2][y0 + 5] = ALIVE;
+  world[x0 - 1][y0 + 6] = ALIVE;
+
+  return world;
+};
+
+const ship1 = (world, y0, x0) => {
+  world[x0][y0] = ALIVE;
+  world[x0][y0 + 1] = ALIVE;
+  world[x0 - 1][y0] = ALIVE;
+  world[x0 - 1][y0 + 1] = ALIVE;
+  world[x0 - 2][y0 + 2] = ALIVE;
+  world[x0 - 2][y0 + 4] = ALIVE;
+  world[x0 - 3][y0 + 4] = ALIVE;
+  //mirror?
+  world[x0 + 1][y0] = ALIVE;
+  world[x0 + 1][y0 + 1] = ALIVE;
+  world[x0 + 1][y0 + 1] = ALIVE;
+  world[x0 + 2][y0 + 2] = ALIVE;
+  world[x0 + 2][y0 + 4] = ALIVE;
+  world[x0 + 3][y0 + 4] = ALIVE;
+  return world;
+};
+
+const toMirror = (world, i, x, y, axis) => {
+  // world is the array, i is the starting reference, x/y are how much we're moving, axis is the axis to mirror
+  world[i + x][i + y] = ALIVE;
+  if (axis === "x") {
+    // mirror across x-axis
+    world[i - x][i + y] = ALIVE;
+  } else if (axis === "y") {
+    // mirror across y-axis
+    world[i + x][i - y] = ALIVE;
+  } else if (axis === "dia") {
+    // mirror across diagonal axis
+    world[i + y][i + x] = ALIVE;
+  } else if (axis === "quad") {
+    // mirror across x and y-axis (all 4 quadrants)
+    world[i + x][i + y] = ALIVE;
+    world[i - x][i + y] = ALIVE;
+    world[i + x][i - y] = ALIVE;
+    world[i - x][i - y] = ALIVE;
+  }
+  return world;
 };
 
 const line = (world, half) => {
@@ -43,21 +133,30 @@ const line = (world, half) => {
   return world;
 };
 
-const cross = (world) => {
+const cross = (world, half) => {
   const n = world.length - 1;
-  for (let i = 0; i <= n; i++) {
-    world[i][i] = ALIVE;
-    world[n - i][i] = ALIVE;
-    console.log("cross: ", n - i);
+  for (let i = 0; i < n / 2; i++) {
+    world = toMirror(world, half, i, i, "quad");
+  }
+  return world;
+};
+
+const thickCross = (world, half) => {
+  const n = world.length - 8;
+  for (let i = 0; i < n / 2; i++) {
+    world = toMirror(world, half, i, i, "quad");
+    world = toMirror(world, half, i, i - 1, "quad");
+    world = toMirror(world, half, i, i - 2, "quad");
+    world = toMirror(world, half, i, i + 1, "quad");
+    world = toMirror(world, half, i, i + 2, "quad");
   }
   return world;
 };
 
 const plus = (world, half) => {
   const n = world.length - 1;
-  world[half].fill(ALIVE);
   for (let i = 0; i <= n; i++) {
-    world[i][half] = ALIVE;
+    world = toMirror(world, 0, half, i, "dia");
   }
   return world;
 };
@@ -73,25 +172,46 @@ const glider = (world, startX, startY) => {
   world[x - 2][y + 1] = ALIVE;
   return world;
 };
-// const glider = (world) => {
-//   world[3][3] = ALIVE;
-//   world[3][4] = ALIVE;
-//   world[3][5] = ALIVE;
-//   world[2][3] = ALIVE;
-//   world[1][4] = ALIVE;
 
-//   return world;
-// };
-
-const pulsar = (world) => {
+const pulsar = (world, half) => {
+  for (let i = 2; i <= 4; i++) {
+    world = toMirror(world, half, i, 1, "quad");
+    world = toMirror(world, half, i, 6, "quad");
+    world = toMirror(world, half, 1, i, "quad");
+    world = toMirror(world, half, 6, i, "quad");
+  }
   return world;
 };
 
-const diehard = (world) => {
+const diehard = (world, half) => {
   return world;
 };
 
-const gliderGun = (world) => {
+const gliderGunSE = (world, half, x, y) => {
+  // BLOCKS
+  world = toBlock(world, half - 18 - x, half + 1 - y);
+  world = toBlock(world, half + 16 - x, half - 1 - y);
+  // Left side ship
+  world = toEgg(world, half - 8 - x, half + 1 - y);
+  // Right side ship
+  world = ship1(world, half + 2 - x, half - 1 - y);
+  return world;
+};
+
+const gliderGunNE = (world, half, x, y) => {
+  // BLOCKS
+  world = toBlock(world, half - 18 - x, half - 1 - y);
+  world = toBlock(world, half + 16 - x, half + 1 - y);
+  // Left side ship
+  world = toEgg(world, half - 8 - x, half - 1 - y);
+  // Right side ship
+  world = ship1(world, half + 2 - x, half + 1 - y);
+  return world;
+};
+
+const duelingGliderGuns = (world, half) => {
+  world = gliderGunSE(world, half, 8, 10);
+  world = gliderGunNE(world, half, 8, -10);
   return world;
 };
 

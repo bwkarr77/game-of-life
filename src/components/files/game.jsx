@@ -1,5 +1,5 @@
 export const WORLD_SIZE = 70; //make this changeable
-export const GEN_TIME = 500; //milliseconds until next generation
+export const GEN_TIME = 100; //milliseconds until next generation
 export const ALIVE = 1;
 export const DEAD = 0;
 
