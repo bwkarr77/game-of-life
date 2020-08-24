@@ -35,7 +35,8 @@ p > span {
 }
 
 .cell {
-  background-color: #e9e9eb;
+  /* background-color: #e9e9eb; */
+  background-color: pink;
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -49,4 +50,16 @@ p > span {
 
 .label_grid {
   width: 50px;
+}
+
+.greyMode {
+  background-color: #e9e9eb;
+}
+
+.dark_mode {
+  background-color: darkblue;
+}
+
+.day_mode {
+  background-color: yellow;
 }

@@ -30,7 +30,7 @@ export const presetOptions = [
 export const loadPreset = (preset) => {
   let newWorld = createWorld();
   const half = Math.floor(WORLD_SIZE / 2);
-  // console.log("presets.jsx>loadPreset", newWorld);
+  console.log("presets.jsx>loadPreset", preset);
   switch (preset) {
     case "line":
       return line(newWorld, half);

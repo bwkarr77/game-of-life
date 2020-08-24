@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Controls from "./Controls.jsx";
 import Grid from "./Grid.jsx";
-import Presets from "./Presets.jsx";
 import Settings from "./Settings.jsx";
 import { loadPreset } from "../files/presets.jsx";
 import { loadColorStyling, loadGridSizeG } from "../files/settings.jsx";
@@ -14,13 +13,11 @@ import {
   getSpeed,
 } from "../files/game.jsx";
 
-// import { GridContext } from "../../contexts/GridContext.jsx";
-
 class Game extends React.Component {
   state = {
     world: loadPreset("cross"),
     generation: 0,
-    playing: false,
+    isPlaying: false,
     colorStyle: loadColorStyling("greyColor"),
     gridSize: loadGridSizeG(70),
     genSpeed: 100,
@@ -39,68 +36,70 @@ class Game extends React.Component {
   onChange = (world) =>
     this.changeState({ world: world, generation: this.state.generation + 1 });
 
+  // clears the board, sets generation to 0
   onClear = () => this.changeState(createWorld(), 0);
 
   // starts the generation creation (speed is GEN_TIME)
   onPlay = () => {
-    this.setState({ playing: true });
+    this.setState({ isPlaying: true });
     this.interval = setInterval(() => this.onNext(), GEN_TIME);
   };
 
   // stops/pauses the generation creation
   onStop = () => {
-    this.setState({ playing: false });
+    this.setState({ isPlaying: false });
     clearInterval(this.interval);
   };
 
   // move to the next generation
   onNext = () => this.onChange(nextGen(this.state.world));
 
-  // loads a preset from a list
-  onPreset = (preset) =>
-    this.changeState({
-      world: loadPreset(preset),
-      nextGen: 0,
-    });
-
   // randomly fills the board
   onShuffle = () => this.changeState(randomFill(this.state.world), 0);
 
   // loads settings
   onSettingStyle = (settings) => {
+    console.log("settings: ", settings);
     const { update, setUpdate } = this.props;
+    const { gridSize, colorStyle, generationSpeed, preset } = settings;
+
+    getWorldSize(gridSize);
+    getSpeed(generationSpeed);
 
     this.setState({
-      colorStyle: settings.colorStyle,
-      gridSize: settings.gridSize,
-      genSpeed: settings.generationSpeed,
+      colorStyle: colorStyle,
+      gridSize: gridSize,
+      genSpeed: generationSpeed,
+      world: loadPreset(preset),
+      nextGen: 0,
     });
 
-    getWorldSize(settings.gridSize);
-    getSpeed(settings.generationSpeed);
-    this.onPreset();
     setUpdate(!update);
   };
 
   render() {
     console.log("GAME>state: ", this.state, this.props);
     return (
-      // <GridContext.Provider value={{ state, onChange, onClear }}>
       <div className="game">
-        <Grid world={this.state.world} onChange={this.onChange} />
+        <Grid
+          world={this.state.world}
+          onChange={this.onChange}
+          colorStyle={this.state.colorStyle}
+        />
         <p>Generation: {this.state.generation}</p>
         <Controls
           clear={this.onClear}
-          playing={this.state.playing}
+          isPlaying={this.state.isPlaying}
           play={this.onPlay}
           stop={this.onStop}
           shuffle={this.onShuffle}
           next={this.onNext}
         />
-        <Presets load={this.onPreset} playing={this.state.playing} />
-        <Settings playing={this.state.playing} load1={this.onSettingStyle} />
+        <Settings
+          isPlaying={this.state.isPlaying}
+          load1={this.onSettingStyle}
+        />
       </div>
-      // </GridContext.Provider>
     );
   }
 }

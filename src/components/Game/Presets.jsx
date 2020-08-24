@@ -5,7 +5,7 @@ import { Dropdown, Button } from "semantic-ui-react";
 import { presetOptions } from "../files/presets.jsx";
 
 const Presets = (props) => {
-  const { load, playing } = props;
+  const { load, isPlaying } = props;
 
   const [preset, setPreset] = useState("line");
 
@@ -23,14 +23,14 @@ const Presets = (props) => {
           options={presetOptions}
           selection
           className="label"
-          disabled={playing}
+          disabled={isPlaying}
           value={preset}
           onChange={(e, { value }) => {
             console.log("Presets.jsx:onChange: ", value);
             setPreset(`${value}`);
           }}
         />
-        <Button content="Load" onClick={onLoad} disabled={playing} />
+        <Button content="Load" onClick={onLoad} disabled={isPlaying} />
       </Button>
     </div>
   );

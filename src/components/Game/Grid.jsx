@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { changeArray } from "../files/game.jsx";
 
-import { GridContext } from "../../contexts/GridContext.jsx";
-
 const Grid = (props) => {
-  const { world, onChange } = props;
+  const { world, onChange, colorStyle } = props;
 
-  // const { world, onChange } = useContext(GridContext);
+  // const [colorStyle, setColorStyle] = useState("");
 
-  // console.log("Grid>props: ", props.world);
+  // setColorStyle(`${props.colorStyle}`);
 
   const changeCell = (cell, x, y) => {
     // const { world } = props;
@@ -21,7 +19,7 @@ const Grid = (props) => {
     return (
       <div
         key={x}
-        className="cell"
+        className={`cell ${colorStyle}`}
         style={{ backgroundColor: cell ? "#424151" : null }}
         onMouseDown={() => changeCell(cell, x, y)}
       />

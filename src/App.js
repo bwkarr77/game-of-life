@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import GameClass from "./components/Game/GameClass.jsx";
 import { Divider, Header } from "semantic-ui-react";
+import { Game3D } from "./components/3D/Game3D.jsx";
 
 function App() {
   const [didUpdate, setUpdate] = useState(false);
@@ -19,6 +20,7 @@ function App() {
         </Header>
         <Divider />
         <GameClass update={didUpdate} setUpdate={setUpdate} />
+        <Game3D />
       </header>
     </div>
   );

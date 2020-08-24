@@ -9,8 +9,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
+    "react-three-fiber": "^4.2.20",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.2.0"
+    "semantic-ui-react": "^1.2.0",
+    "three": "^0.119.1"
   },
   "scripts": {
     "start": "react-scripts start",
