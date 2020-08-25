@@ -3,7 +3,7 @@ import { Button } from "semantic-ui-react";
 // install semantic-ui-css as well
 
 const Controls = (props) => {
-  // console.log("Controls>props: ", props);
+  console.log("Controls>props: ", props);
   return (
     <div>
       <div className="controls">
@@ -26,7 +26,7 @@ const Controls = (props) => {
           labelPosition="right"
           onClick={props.next}
         />
-        {!props.playing ? (
+        {!props.isPlaying ? (
           <Button content="Play" icon="redo" onClick={props.play} />
         ) : (
           <Button content="Stop" icon="redo" onClick={props.stop} />

@@ -63,3 +63,8 @@ p > span {
 .day_mode {
   background-color: yellow;
 }
+
+.vis-container {
+  width: 90%;
+  height: 80vh;
+}

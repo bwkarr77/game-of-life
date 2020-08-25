@@ -24,11 +24,11 @@ class Game extends React.Component {
   };
 
   changeState = (props) => {
-    const { world, nextGen, color } = props;
-    console.log("changeState: ", props, world, nextGen);
+    const { world, generation, color } = props;
+    console.log("changeState: ", props, world, generation);
     this.setState({
       world: world,
-      generation: nextGen,
+      generation: generation,
     });
   };
 
@@ -71,7 +71,7 @@ class Game extends React.Component {
       gridSize: gridSize,
       genSpeed: generationSpeed,
       world: loadPreset(preset),
-      nextGen: 0,
+      generation: 0,
     });
 
     setUpdate(!update);

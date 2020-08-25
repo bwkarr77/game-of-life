@@ -9,7 +9,7 @@ const cam = {
   z: 2,
 };
 
-const ThreePointVis = ({}) => {
+const ThreePointVis = ({ data }) => {
   return (
     <Canvas camera={{ position: [cam.x, cam.y, cam.z] }}>
       <Controls />
@@ -20,12 +20,24 @@ const ThreePointVis = ({}) => {
         groundColor="#080820"
         intensity={1.0}
       />
-      <mesh position={[0, 0, 0]} rotation={[Math.PI * 0.5, 0, 0]}>
-        {/* <cylinderBufferGeometry attach="geometry" args={[1, 1, 1, 4]} /> */}
-        <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-        {/* args={[ x?, y?, depth, polygon-sides]} */}
-        <meshStandardMaterial attach="material" color="#fff" />
-      </mesh>
+      {data.map((d, i) => {
+        const x = (i % 30) * 1.05;
+        const y = Math.floor(i / 30) * 1.05;
+        const z = 0;
+        return (
+          <mesh
+            key={i.id}
+            position={[x, y, z]}
+            rotation={[Math.PI * 0.5, 0, 0]}
+          >
+            <cylinderBufferGeometry
+              attach="geometry"
+              args={[0.5, 0.5, 0.15, 32]}
+            />
+            <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
+          </mesh>
+        );
+      })}
     </Canvas>
   );
 };
