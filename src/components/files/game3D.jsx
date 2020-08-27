@@ -86,7 +86,7 @@ export const getNeighbors3D = (x, y, z) => {
 };
 
 export const aliveNeighbors = (world, x, y, z) => {
-  console.log("3DaliveNeighbors: ", x, y, z, world);
+  // console.log("3DaliveNeighbors: ", x, y, z, world);
   const res = getNeighbors3D(x, y, z).filter(
     (living) => world[living[0]][living[1]] === ALIVE
   ).length;

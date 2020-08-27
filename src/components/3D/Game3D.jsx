@@ -1,64 +1,59 @@
-// $ npm install react-three-fiber three
-
 import React, { useState } from "react";
 import ThreePointVis from "./ThreePointVis.jsx";
-import ThreePointVis_Tut from "./ThreePointVis_Tut.jsx";
+// import ThreePointVis_Tut from "./ThreePointVis_Tut.jsx";
 import Controls3D from "./Controls3D.jsx";
 import Settings3D from "./Settings3D.jsx";
 
 import { createWorld, create3DWorld, nextGen } from "../files/game3D.jsx";
 import { loadPreset } from "../files/presets3D.jsx";
 
-// import './styles.css';
-
-const data = new Array(100).fill(0).map((d, id) => ({ id }));
-
-var testWorld = createWorld();
-testWorld[1][1][1] = 5;
-
-console.log("3D createWorld: ", testWorld);
-// console.log("3D create3DWorld: ", create3DWorld());
+import "./styles3D.css";
 
 export const Game3D = (props) => {
   const [state3D, setState3D] = useState({
-    // world3D: createWorld(),
-    world3D: loadPreset("box"),
+    // world3D: loadPreset("line"),
+    world3D: loadPreset("plus"),
     generation: 0,
     isPlaying: false,
   });
 
   const changeState = (props) => {
-    const { world, nextGen } = props;
+    console.log("3d changestate: ", props);
+    const { world3D, nextGen } = props;
     setState3D({
-      world: world,
+      world3D: world3D,
       generation: nextGen,
     });
   };
 
   const onChange = (world) => {
-    changeState({ world: world, nextGen: state3D.generation + 1 });
+    changeState({ world3D: world, generation: state3D.generation + 1 });
   };
 
   const onPlay = () => {
-    // console.log("3D onPlay: ", state3D.world3D);
+    console.log("3D onPlay: ", state3D.world3D);
     setState3D({ isPlaying: true });
-    this.interval = setInterval(() => onNext(), 500);
+    setInterval(() => onNext(), 500);
   };
 
   const onNext = () => {
+    console.log("onNext: ", state3D.world3D);
     onChange(nextGen(state3D.world3D));
   };
 
   const onStop = () => {
     setState3D({ isPlaying: false });
-    clearInterval(this.interval);
+    // clearInterval(interval);
   };
 
   console.log("world3D:", state3D.world3D);
   return (
-    <div className="vis-container">
-      {/* <ThreePointVis data={data} /> */}
-      <ThreePointVis_Tut data={data} />
+    <div className="container-3D">
+      <Settings3D />
+      <div className="vis-container">
+        <ThreePointVis world={state3D.world3D} />
+        {/* <ThreePointVis_Tut data={data} /> */}
+      </div>
       <Controls3D
         isPlaying={state3D.isPlaying}
         play={onPlay}

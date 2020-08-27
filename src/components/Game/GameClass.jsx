@@ -48,7 +48,7 @@ class Game extends React.Component {
   // stops/pauses the generation creation
   onStop = () => {
     this.setState({ isPlaying: false });
-    clearInterval(this.interval);
+    // clearInterval(this.interval);
   };
 
   // move to the next generation

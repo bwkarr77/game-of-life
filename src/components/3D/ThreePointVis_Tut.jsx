@@ -5,16 +5,16 @@ import InstancedPoints from "./InstancedPoints.jsx";
 
 // camera position, values are 'units' away from object
 const cam = {
-  x: 10,
+  x: -10,
   y: 10,
   z: 10,
 };
 
 const ThreePointVis_Tut = ({ data }) => {
   return (
-    <Canvas camera={{ position: [cam.x, cam.y, cam.z], far: 15000 }}>
+    <Canvas camera={{ position: [cam.x, cam.y, cam.z] }}>
       <Controls />
-      <ambientLight color="#ffffff" intensity={0.1} />
+      <ambientLight color="#000000" intensity={0.1} />
       <hemisphereLight
         color="#ffffff"
         skyColor="#ffffbb"

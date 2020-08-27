@@ -4,7 +4,7 @@ import * as THREE from "three";
 // re-use for instance computations
 const scratchObject3D = new THREE.Object3D();
 
-const gWidth = 50;
+const gWidth = 20;
 
 const InstancedPoints = ({ data }) => {
   const meshRef = React.useRef();
@@ -35,8 +35,9 @@ const InstancedPoints = ({ data }) => {
       args={[null, null, numPoints]}
       frustumCulled={false}
     >
-      <cylinderBufferGeometry attach="geometry" args={[0.5, 0.5, 0.15, 32]} />
-      <meshStandardMaterial attach="material" color="#fff" />
+      {/* <cylinderBufferGeometry attach="geometry" args={[0.5, 0.5, 1, 32]} /> */}
+      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
+      <meshStandardMaterial attach="material" color="#eb4034" />
     </instancedMesh>
   );
 };

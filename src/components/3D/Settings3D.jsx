@@ -9,6 +9,8 @@ import {
 } from "../files/settings.jsx";
 import { loadPreset, presetOptions } from "../files/presets.jsx";
 
+import "./styles3D.css";
+
 const Settings3D = (props) => {
   const { load1, isPlaying } = props;
 
@@ -26,8 +28,31 @@ const Settings3D = (props) => {
 
   // console.log("Settings3D: ", settings);
 
+  const [rules, setRules] = useState({
+    a: 4,
+    b: 5,
+    c: 5,
+    d: 5,
+  });
+
+  // const onChangeRules = (e, value) =>
+
   return (
     <div className="controls">
+      {/* <div className="rules">
+        a:{" "}
+        <input
+          id="a"
+          type="text"
+          className="rule_input"
+          value={rules.a}
+          onChange={(e, value) => console.log(e.target.id, e.target.value)}
+        />
+        b: <input id="b" type="text" className="rule_input" value={rules.b} />
+        c: <input id="c" type="text" className="rule_input" value={rules.c} />
+        d: <input id="d" type="text" className="rule_input" value={rules.d} />
+      </div> */}
+
       <Button as="div" labelPosition="left" width="5px">
         {/* <Presets load={onPreset} isPlaying={isPlaying} /> */}
         <Dropdown
@@ -71,7 +96,7 @@ const Settings3D = (props) => {
           placeholder="Generation Speed"
           options={generationSpeed}
           selection
-          className="label_grid"
+          className="label"
           disabled={isPlaying}
           value={settings.generationSpeed}
           onChange={(e, { value }) => {

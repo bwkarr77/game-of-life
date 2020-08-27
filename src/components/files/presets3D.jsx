@@ -2,7 +2,7 @@ import { ALIVE, WORLD_SIZE, createWorld } from "./game3D.jsx";
 
 export const presetOptions = [
   { key: "box", value: "box", text: "Box" },
-  // { key: "line", value: "line", text: "Line" },
+  // { key: "plane", value: "plane", text: "plane" },
   // { key: "cross", value: "cross", text: "Cross" },
   // { key: "thickCross", value: "thickCross", text: "Thick Cross" },
   // { key: "plus", value: "plus", text: "Plus" },
@@ -35,8 +35,8 @@ export const loadPreset = (preset) => {
   switch (preset) {
     case "box":
       return box(newWorld, half);
-    case "line":
-      return line(newWorld, half);
+    case "plane":
+      return plane(newWorld, half);
     case "glider":
       return glider(newWorld, half);
     case "cross":
@@ -45,20 +45,6 @@ export const loadPreset = (preset) => {
       return thickCross(newWorld, half);
     case "plus":
       return plus(newWorld, half);
-    case "pulsar":
-      return pulsar(newWorld, half);
-    case "diehard":
-      return diehard(newWorld, half);
-    case "gliderGunSE":
-      return gliderGunSE(newWorld, half, 0, 0);
-    case "gliderGunNE":
-      return gliderGunNE(newWorld, half, 0, 0);
-    case "duelingGliderGuns":
-      return duelingGliderGuns(newWorld, half, 0, 0);
-    case "infiniteGrowth":
-      return infiniteGrowth(newWorld, half);
-    // case "testingPatterns":
-    //   return testingPatterns(newWorld, half);
     default:
       return newWorld;
   }
@@ -132,6 +118,7 @@ const toMirror = (world, i, x, y, axis) => {
 };
 
 const box = (world, half) => {
+  // 3d works
   const boxSize = 3;
   for (let i = 0; i < boxSize; i++) {
     for (let j = 0; j < boxSize; j++) {
@@ -143,8 +130,23 @@ const box = (world, half) => {
   return world;
 };
 
-const line = (world, half) => {
-  world[half].fill(ALIVE);
+const plane = (world, half) => {
+  // 3d works
+  console.log("plane: ", world, world[half], world[1][1][1]);
+  world[half].map((row, j) => {
+    console.log("plane, row:", row);
+    world[half][j].fill(ALIVE);
+  });
+  return world;
+};
+
+const plus = (world, half) => {
+  //3d works
+  for (let i = 0; i < WORLD_SIZE; i++) {
+    world[i][half][half] = ALIVE;
+    world[half][i][half] = ALIVE;
+    world[half][half][i] = ALIVE;
+  }
   return world;
 };
 
@@ -164,14 +166,6 @@ const thickCross = (world, half) => {
     world = toMirror(world, half, i, i - 2, "quad");
     world = toMirror(world, half, i, i + 1, "quad");
     world = toMirror(world, half, i, i + 2, "quad");
-  }
-  return world;
-};
-
-const plus = (world, half) => {
-  const n = world.length - 1;
-  for (let i = 0; i <= n; i++) {
-    world = toMirror(world, 0, half, i, "dia");
   }
   return world;
 };
