@@ -19,7 +19,7 @@ const Settings3D = (props) => {
     preset: "box",
     colorStyle: "purple",
     gridSize: 70,
-    speed: 100,
+    generationSpeed: 100,
   });
 
   const onLoad = () => {

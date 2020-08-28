@@ -1,4 +1,4 @@
-export let WORLD_SIZE = 10; //make this changeable
+export let WORLD_SIZE = 70; //make this changeable
 export let GEN_TIME = 100; //milliseconds until next generation
 export const ALIVE = 1;
 export const DEAD = 0;
