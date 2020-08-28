@@ -12,9 +12,10 @@ import "./styles3D.css";
 export const Game3D = (props) => {
   const [state3D, setState3D] = useState({
     // world3D: loadPreset("line"),
-    world3D: loadPreset("plus"),
+    world3D: loadPreset("box"),
     generation: 0,
     isPlaying: false,
+    colorStyle: "default",
   });
 
   const changeState = (props) => {
@@ -27,6 +28,7 @@ export const Game3D = (props) => {
   };
 
   const onChange = (world) => {
+    console.log("onChange: ", world);
     changeState({ world3D: world, generation: state3D.generation + 1 });
   };
 
@@ -43,16 +45,27 @@ export const Game3D = (props) => {
 
   const onStop = () => {
     setState3D({ isPlaying: false });
-    // clearInterval(interval);
+    clearInterval();
+  };
+
+  const onSettingStyle = (settings, rules) => {
+    // console.log("onsettings: ", settings, rules);
+    const { colorStyle, gridSize, preset, generationSpeed } = settings;
+    // setState3D({
+    //   world3D: loadPreset(`${preset}`),
+    //   generation: generationSpeed,
+    //   colorStyle: `${colorStyle}`,
+    // });
   };
 
   console.log("world3D:", state3D.world3D);
+
+  console.log("state3D:", state3D);
   return (
     <div className="container-3D">
-      <Settings3D />
+      <Settings3D isPlaying={state3D.isPlaying} load={onSettingStyle} />
       <div className="vis-container">
         <ThreePointVis world={state3D.world3D} />
-        {/* <ThreePointVis_Tut data={data} /> */}
       </div>
       <Controls3D
         isPlaying={state3D.isPlaying}

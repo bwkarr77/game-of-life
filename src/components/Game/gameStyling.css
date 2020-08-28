@@ -1,0 +1,55 @@
+.controls {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.game-grid {
+  text-align: center;
+}
+
+.row {
+  height: 10px;
+}
+
+.cell {
+  background-color: #e9e9eb;
+  /* background-color: pink; */
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  border: solid 1px rgba(0, 0, 0, 0.6);
+}
+
+.cell:hover {
+  background-color: #bcbcc1;
+}
+
+.label_grid {
+  width: 50px;
+}
+
+.greyMode {
+  background-color: #e9e9eb;
+  color: black;
+}
+
+.darkMode {
+  background-color: darkblue;
+  color: rgb(19, 255, 255) !important;
+}
+
+.dayMode {
+  background-color: rgb(19, 255, 255);
+  color: darkblue !important;
+}
+
+/* .vis-container {
+    width: 90%;
+    height: 80vh;
+  } */
+
+.test {
+  background-color: pink;
+  color: red !important;
+}

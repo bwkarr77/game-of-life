@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { changeArray } from "../files/game.jsx";
+import UseStyling from "./UseStyling.jsx";
 
 const Grid = (props) => {
   const { world, onChange, colorStyle } = props;
 
-  // const [colorStyle, setColorStyle] = useState("");
-
-  // setColorStyle(`${props.colorStyle}`);
-
   const changeCell = (cell, x, y) => {
-    // const { world } = props;
     const row = changeArray(world[y], x, cell ? 0 : 1);
     const newWorld = changeArray(world, y, row);
     onChange(newWorld);
@@ -19,7 +15,7 @@ const Grid = (props) => {
     return (
       <div
         key={x}
-        className={`cell ${colorStyle}`}
+        className={`cell`}
         style={{ backgroundColor: cell ? "#424151" : null }}
         onMouseDown={() => changeCell(cell, x, y)}
       />

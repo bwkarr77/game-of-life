@@ -1,7 +1,8 @@
 export const colorOptions = [
-  { key: "greyMode", value: "greyMode", text: "greyMode" },
-  { key: "dayMode", value: "dayMode", text: "dayMode" },
-  { key: "darkMode", value: "darkMode", text: "darkMode" },
+  // { key: "test", value: "test", text: "Test" },
+  { key: "greyMode", value: "greyMode", text: "Grey Mode" },
+  { key: "dayMode", value: "dayMode", text: "Day Mode" },
+  { key: "darkMode", value: "darkMode", text: "Dark Mode" },
 ];
 
 export const gridSizeOptions = [

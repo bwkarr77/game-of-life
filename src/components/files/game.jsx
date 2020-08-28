@@ -1,4 +1,3 @@
-// export let WORLD_SIZE = 70; //make this changeable
 export let WORLD_SIZE = 10; //make this changeable
 export let GEN_TIME = 100; //milliseconds until next generation
 export const ALIVE = 1;
@@ -31,20 +30,23 @@ export const getNeighbors = (x, y) => {
     [x + 1, y - 1],
     [x + 1, y],
     [x + 1, y + 1],
-  ].filter(
-    (cell) =>
-      // if x and y of cell are greater than 0 and inside the world perimeter:
+  ].filter((cell) => {
+    // console.log("getNeighbors: ", cell[0], cell[1]);
+    // if x and y of cell are greater than 0 and inside the world perimeter:
+    return (
       cell[0] >= 0 &&
       cell[0] < WORLD_SIZE &&
       cell[1] >= 0 &&
       cell[1] < WORLD_SIZE
-  );
+    );
+  });
 };
 
 export const aliveNeighbors = (world, x, y) => {
-  return getNeighbors(x, y).filter(
-    (living) => world[living[0]][living[1]] === ALIVE
-  ).length;
+  return getNeighbors(x, y).filter((living) => {
+    console.log("living: ", living[0], living[1], world[living[0]][living[1]]);
+    return world[living[0]][living[1]] === ALIVE;
+  }).length;
 };
 
 export const nextGen = (world) => {

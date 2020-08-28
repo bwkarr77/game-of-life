@@ -7,15 +7,16 @@ import {
   gridSizeOptions,
   generationSpeed,
 } from "../files/settings.jsx";
-import { loadPreset, presetOptions } from "../files/presets.jsx";
+import { loadPreset, presetOptions } from "../files/presets3D.jsx";
 
 import "./styles3D.css";
 
 const Settings3D = (props) => {
-  const { load1, isPlaying } = props;
+  console.log("settings3d: ", props);
+  const { load, isPlaying } = props;
 
   const [settings, setSettings] = useState({
-    preset: "cross",
+    preset: "box",
     colorStyle: "purple",
     gridSize: 70,
     speed: 100,
@@ -23,10 +24,8 @@ const Settings3D = (props) => {
 
   const onLoad = () => {
     console.log("onLoad: ", settings);
-    return load1(settings);
+    return load(settings, rules);
   };
-
-  // console.log("Settings3D: ", settings);
 
   const [rules, setRules] = useState({
     a: 4,
@@ -35,23 +34,55 @@ const Settings3D = (props) => {
     d: 5,
   });
 
+  const onChangeRules = (id, val) => {
+    setRules({
+      ...rules,
+      [id]: parseInt(val),
+    });
+  };
+
   // const onChangeRules = (e, value) =>
+  const onSubmit = (props) => {
+    props.preventDefault();
+    console.log("onSubmit", rules);
+  };
 
   return (
     <div className="controls">
-      {/* <div className="rules">
-        a:{" "}
+      <form className="rules" onSubmit={onSubmit}>
+        <label>a</label>
         <input
           id="a"
-          type="text"
           className="rule_input"
           value={rules.a}
-          onChange={(e, value) => console.log(e.target.id, e.target.value)}
+          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
         />
-        b: <input id="b" type="text" className="rule_input" value={rules.b} />
-        c: <input id="c" type="text" className="rule_input" value={rules.c} />
-        d: <input id="d" type="text" className="rule_input" value={rules.d} />
-      </div> */}
+        <label>b: </label>
+        <input
+          id="b"
+          type="text"
+          className="rule_input"
+          value={rules.b}
+          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
+        />
+        <label>c: </label>
+        <input
+          id="c"
+          type="text"
+          className="rule_input"
+          value={rules.c}
+          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
+        />
+        <label>d: </label>
+        <input
+          id="d"
+          type="text"
+          className="rule_input"
+          value={rules.d}
+          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
+        />
+        <button>Submit</button>
+      </form>
 
       <Button as="div" labelPosition="left" width="5px">
         {/* <Presets load={onPreset} isPlaying={isPlaying} /> */}

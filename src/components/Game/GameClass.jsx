@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import Controls from "./Controls.jsx";
 import Grid from "./Grid.jsx";
 import Settings from "./Settings.jsx";
@@ -13,6 +14,10 @@ import {
   getSpeed,
 } from "../files/game.jsx";
 
+import UseStyling from "./UseStyling.jsx";
+
+import "./gameStyling.css";
+
 class Game extends React.Component {
   state = {
     world: loadPreset("cross"),
@@ -25,7 +30,6 @@ class Game extends React.Component {
 
   changeState = (props) => {
     const { world, generation, color } = props;
-    console.log("changeState: ", props, world, generation);
     this.setState({
       world: world,
       generation: generation,
@@ -37,7 +41,7 @@ class Game extends React.Component {
     this.changeState({ world: world, generation: this.state.generation + 1 });
 
   // clears the board, sets generation to 0
-  onClear = () => this.changeState(createWorld(), 0);
+  onClear = () => this.changeState({ world: createWorld(), generation: 0 });
 
   // starts the generation creation (speed is GEN_TIME)
   onPlay = () => {
@@ -48,18 +52,18 @@ class Game extends React.Component {
   // stops/pauses the generation creation
   onStop = () => {
     this.setState({ isPlaying: false });
-    // clearInterval(this.interval);
+    clearInterval(this.interval);
   };
 
   // move to the next generation
   onNext = () => this.onChange(nextGen(this.state.world));
 
   // randomly fills the board
-  onShuffle = () => this.changeState(randomFill(this.state.world), 0);
+  onShuffle = () =>
+    this.changeState({ world: randomFill(this.state.world), generation: 0 });
 
   // loads settings
   onSettingStyle = (settings) => {
-    console.log("settings: ", settings);
     const { update, setUpdate } = this.props;
     const { gridSize, colorStyle, generationSpeed, preset } = settings;
 
@@ -74,11 +78,12 @@ class Game extends React.Component {
       generation: 0,
     });
 
+    UseStyling(colorStyle);
+
     setUpdate(!update);
   };
 
   render() {
-    console.log("GAME>state: ", this.state, this.props);
     return (
       <div className="game">
         <Grid
@@ -95,10 +100,7 @@ class Game extends React.Component {
           shuffle={this.onShuffle}
           next={this.onNext}
         />
-        <Settings
-          isPlaying={this.state.isPlaying}
-          load1={this.onSettingStyle}
-        />
+        <Settings isPlaying={this.state.isPlaying} load={this.onSettingStyle} />
       </div>
     );
   }

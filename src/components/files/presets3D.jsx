@@ -2,8 +2,8 @@ import { ALIVE, WORLD_SIZE, createWorld } from "./game3D.jsx";
 
 export const presetOptions = [
   { key: "box", value: "box", text: "Box" },
-  // { key: "plane", value: "plane", text: "plane" },
-  // { key: "cross", value: "cross", text: "Cross" },
+  { key: "plane", value: "plane", text: "plane" },
+  { key: "cross", value: "cross", text: "Cross" },
   // { key: "thickCross", value: "thickCross", text: "Thick Cross" },
   // { key: "plus", value: "plus", text: "Plus" },
   // { key: "glider", value: "glider", text: "Glider" },
