@@ -1,0 +1,22 @@
+html,
+body {
+  background-color: #222233;
+  line-height: 0;
+}
+
+p {
+  align-content: center;
+  color: #fff;
+  opacity: 0.4;
+  padding-top: 15px;
+  text-align: center;
+}
+
+p > span {
+  opacity: 0.4;
+  text-align: center;
+}
+
+.title {
+  padding-top: 20px;
+}

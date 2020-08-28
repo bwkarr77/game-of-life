@@ -1,0 +1,25 @@
+.container-3D {
+  width: 99%;
+  /* background-color: tomato; */
+}
+
+.vis-container {
+  width: 90%;
+  margin: auto;
+  height: 55vh;
+  border: 2px solid white;
+}
+
+.label {
+  width: 5px;
+  color: red;
+}
+
+.label_grid {
+  /* background-color: red !important; */
+  width: 1px !important;
+}
+
+.rule_input {
+  width: 50px;
+}
