@@ -12,7 +12,7 @@ import "./styles3D.css";
 export const Game3D = (props) => {
   const [state3D, setState3D] = useState({
     // world3D: loadPreset("line"),
-    world3D: loadPreset("box"),
+    world3D: loadPreset("plane"),
     generation: 0,
     isPlaying: false,
     colorStyle: "default",
@@ -20,10 +20,10 @@ export const Game3D = (props) => {
 
   const changeState = (props) => {
     console.log("3d changestate: ", props);
-    const { world3D, nextGen } = props;
+    const { world3D, generation } = props;
     setState3D({
       world3D: world3D,
-      generation: nextGen,
+      generation: generation,
     });
   };
 
@@ -33,13 +33,13 @@ export const Game3D = (props) => {
   };
 
   const onPlay = () => {
-    console.log("3D onPlay: ", state3D.world3D);
+    // console.log("3D onPlay: ", state3D.world3D);
     setState3D({ isPlaying: true });
     setInterval(() => onNext(), 500);
   };
 
   const onNext = () => {
-    console.log("onNext: ", state3D.world3D);
+    // console.log("onNext: ", state3D.world3D);
     onChange(nextGen(state3D.world3D));
   };
 
@@ -50,15 +50,13 @@ export const Game3D = (props) => {
 
   const onSettingStyle = (settings, rules) => {
     // console.log("onsettings: ", settings, rules);
-    const { colorStyle, gridSize, preset, generationSpeed } = settings;
+    // const { colorStyle, gridSize, preset, generationSpeed } = settings;
     // setState3D({
     //   world3D: loadPreset(`${preset}`),
     //   generation: generationSpeed,
     //   colorStyle: `${colorStyle}`,
     // });
   };
-
-  console.log("world3D:", state3D.world3D);
 
   console.log("state3D:", state3D);
   return (

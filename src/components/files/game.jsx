@@ -1,4 +1,4 @@
-export let WORLD_SIZE = 10; //make this changeable
+export let WORLD_SIZE = 70; //make this changeable
 export let GEN_TIME = 100; //milliseconds until next generation
 export const ALIVE = 1;
 export const DEAD = 0;
@@ -44,7 +44,7 @@ export const getNeighbors = (x, y) => {
 
 export const aliveNeighbors = (world, x, y) => {
   return getNeighbors(x, y).filter((living) => {
-    console.log("living: ", living[0], living[1], world[living[0]][living[1]]);
+    // console.log("living: ", living[0], living[1], world[living[0]][living[1]]);
     return world[living[0]][living[1]] === ALIVE;
   }).length;
 };

@@ -16,7 +16,7 @@ import {
 
 import UseStyling from "./UseStyling.jsx";
 
-import "./gameStyling.css";
+import "./gameStyling.scss";
 
 class Game extends React.Component {
   state = {
@@ -84,6 +84,7 @@ class Game extends React.Component {
   };
 
   render() {
+    // console.log("GameClass: ", this.state);
     return (
       <div className="game">
         <Grid

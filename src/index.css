@@ -20,3 +20,7 @@ p > span {
 .title {
   padding-top: 20px;
 }
+
+.rules-list {
+  line-height: 25px;
+}
