@@ -45,7 +45,10 @@ export const create3DWorld = () => {
 };
 
 export const getNeighbors3D = (x, y, z) => {
-  return [
+  // returns an array of MAXIMUM of 1x26 arrays
+  // --ONLY IF they are within 0 and WORLD_SIZE
+  // each index is a 1x3 array of the x,y,z location of each neighbor
+  const ret = [
     //top section
     [x - 1, y - 1, z - 1],
     [x, y - 1, z - 1],
@@ -76,8 +79,7 @@ export const getNeighbors3D = (x, y, z) => {
     [x, y + 1, z + 1],
     [x + 1, y + 1, z + 1],
   ].filter((cell) => {
-    // console.log("getNeighbors: ", cell[0], cell[1], cell[2]);
-    // if x and y of cell are greater than 0 and inside the world perimeter:
+    // if x,y,z of cell are within 0 and WORLD_SIZE:
     return (
       cell[0] >= 0 &&
       cell[0] < WORLD_SIZE &&
@@ -87,20 +89,24 @@ export const getNeighbors3D = (x, y, z) => {
       cell[2] < WORLD_SIZE
     );
   });
+  return ret;
 };
 
 export const aliveNeighbors = (world, x, y, z) => {
-  // console.log("3DaliveNeighbors: ", x, y, z, world);
-  const res = getNeighbors3D(x, y, z).filter((living) => {
-    // console.log("living...: ", world[living[0]][living[1]]);
-    // console.log("living...: ", living, living[0], living[1], living[2]);
-    return world[living[0]][living[1]][living[2]] === ALIVE;
+  // aliveNeighbors returns an array
+  const res = getNeighbors3D(x, y, z).filter((cell) => {
+    // getNeighbors3D => returns a 1x26 array of cells (1x3 arrays with [x,y,z] coords)
+    // then => filter through each 1x3 array, and testing if they are "ALIVE"
+    // ex:
+    // cell = [cell[0], cell[1], cell[2]] = [2, 1, 2]
+    return world[cell[0]][cell[1]][cell[2]] === ALIVE;
+    // getNeighbors array returns ONLY cells that are ALIVE===1
   }).length;
+  // .length converts getNeighbors into a count of the number of Cells that are ALIVE
   return res;
 };
 
 export const nextGen = (world) => {
-  // console.log("3D,nextGen: ", world);
   let newWorld = createWorld();
   for (let x = 0; x < WORLD_SIZE; x++) {
     for (let y = 0; y < WORLD_SIZE; y++) {
@@ -110,7 +116,7 @@ export const nextGen = (world) => {
         // console.log("nextGen, aliveNeighbor:", alive, cell);
         newWorld[x][y][z] =
           // 4333 relates to
-          alive === 5 || (alive === 4 && cell === ALIVE) ? ALIVE : DEAD;
+          alive === 4 || (alive === 5 && cell === ALIVE) ? ALIVE : DEAD;
       }
     }
   }

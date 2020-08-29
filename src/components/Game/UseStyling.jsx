@@ -1,26 +1,36 @@
-const setHeader = (name, styling, org) => {
-  const header = document.querySelector(`${name}`);
-  header.className = `${org}`;
-  header.classList.add(`${styling}`);
+const setCustTag = (name, styling, def) => {
+  const element = document.querySelector(`${name}`);
+  element.className = `${def}`;
+  if (name === "body") {
+    element.classList.add(`${styling}`);
+  } else if (name === "h2") {
+    element.classList.add(`${styling}_text`);
+  }
+};
+
+const setCustClass = (name, styling, def) => {
+  const element = document.getElementsByClassName(`${name}`);
+  if (name === "navbar") {
+    for (let i = 0; i < element.length; i++) {
+      element[i].className = `${def}`;
+      element[i].classList.add(`${styling}_nav`);
+      // console.log("setCustClass: ", element);
+    }
+  } else {
+    for (let i = 0; i < element.length; i++) {
+      element[i].className = `${def}`;
+      element[i].classList.add(`${styling}`);
+      // console.log("setCustClass: ", element);
+    }
+  }
 };
 
 const UseStyling = (styling) => {
-  // currently clicking on "Play button" turns background to PINK.
-  setHeader("body", styling, "");
-  setHeader("h2", styling, "ui center aligned header title");
+  setCustTag("body", styling, "");
+  setCustTag("h2", styling, "ui center aligned header title");
+  setCustClass("GameDisplay", styling, "GameDisplay");
+  setCustClass("navbar", styling, "navbar");
   //
-
-  const game = document.getElementsByClassName("game");
-  game.className = "";
-  for (let i = 0; i < game.length; i++) {
-    game[i].className = "game";
-    game[i].classList.add(`${styling}`);
-  }
-
-  const header = document.querySelector("h2");
-  console.log("useStyling: header: ", header);
-
-  console.log("useStyling: ", styling);
 };
 
 export default UseStyling;

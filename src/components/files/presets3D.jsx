@@ -134,8 +134,8 @@ const plane = (world, half) => {
   // 3d works
   console.log("plane: ", world, world[half], world[1][1][1]);
   world[half].map((row, j) => {
-    console.log("plane, row:", row);
-    world[half][j].fill(ALIVE);
+    // console.log("plane, row:", row);
+    return world[half][j].fill(ALIVE);
   });
   return world;
 };

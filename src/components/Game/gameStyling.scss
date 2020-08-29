@@ -29,26 +29,49 @@
   width: 50px;
 }
 
+// greyMode
 .greyMode {
-  background-color: #e9e9eb;
+  background-color: rgb(184, 184, 184);
   color: black;
 }
 
+.greyMode_text {
+  color: rgb(0, 0, 0) !important;
+}
+
+.greyMode_nav {
+  background-color: rgba(150, 150, 150, 0.8);
+}
+
+// darkMode
 .darkMode {
-  background-color: darkblue;
+  background-color: rgb(0, 0, 139);
+  color: rgb(19, 255, 255);
+}
+
+.darkMode_text {
   color: rgb(19, 255, 255) !important;
 }
 
-.dayMode {
-  background-color: rgb(19, 255, 255);
-  color: darkblue !important;
+.darkMode_nav {
+  background-color: rgba(6, 6, 97, 0.8);
 }
 
-/* .vis-container {
-    width: 90%;
-    height: 80vh;
-  } */
+// dayMode
+.dayMode {
+  background-color: rgb(19, 255, 255);
+  color: rgb(0, 0, 139) !important;
+}
 
+.dayMode_text {
+  color: rgb(0, 0, 139) !important;
+}
+
+.dayMode_nav {
+  background-color: rgba(19, 183, 233, 0.8);
+}
+
+// testing
 .test {
   background-color: pink;
   color: red !important;
