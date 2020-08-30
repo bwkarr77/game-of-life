@@ -129,7 +129,9 @@ export const changeArray = (arr, i, value) => {
 };
 
 export const randomFill = (world) => {
-  // map through each cell from "world",
+  // Take a 3D array (world), then map through each 2D array (plane), then map through each 1D array (row):
   // fill each cell with a 1 or 0 (Math.round(Math.random()))
-  return world.map((row) => row.map((cell) => Math.round(Math.random())));
+  return world.map((plane) =>
+    plane.map((row) => row.map((cell) => Math.round(Math.random())))
+  );
 };

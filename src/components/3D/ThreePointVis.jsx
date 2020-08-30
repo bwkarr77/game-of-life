@@ -10,6 +10,7 @@ const cam = {
 };
 
 const ThreePointVis = ({ world }) => {
+  console.log("world3d: ", world);
   return (
     <Canvas camera={{ position: [cam.x, cam.y, cam.z] }}>
       <Controls />
@@ -35,6 +36,7 @@ const ThreePointVis = ({ world }) => {
             ) : (
               <mesh key={`${i}${j}${k}`} position={[x, y, z]}>
                 <boxBufferGeometry attach="geometry" args={[0, 0, 0]} />
+                <meshStandardMaterial attach="material" />
               </mesh>
             );
           });
