@@ -1,12 +1,9 @@
-import { CubeCamera } from "three";
-
 export let WORLD_SIZE = 5; //make this changeable
 export let GEN_TIME = 1000; //milliseconds until next generation
 export const ALIVE = 1;
 export const DEAD = 0;
 
 export const getWorldSize = (gridSize) => {
-  console.log("getWorldSize: ", gridSize, WORLD_SIZE);
   WORLD_SIZE = gridSize;
   return WORLD_SIZE;
 };
@@ -25,23 +22,6 @@ export const createWorld = () => {
           .fill()
           .map(() => Array(WORLD_SIZE).fill(DEAD)) // creates a 3D array 'inside' the 2nd Array
     );
-};
-
-export const create3DWorld = () => {
-  const cubeWorld = [];
-  for (var i = 0; i < WORLD_SIZE; i++) {
-    var cubePlane = [];
-    for (var j = 0; j < WORLD_SIZE; j++) {
-      var cubeRow = [];
-      for (var k = 0; k < WORLD_SIZE; k++) {
-        var cube = DEAD;
-        cubeRow.push(cube);
-      }
-      cubePlane.push(cubeRow);
-    }
-    cubeWorld.push(cubePlane);
-  }
-  return cubeWorld;
 };
 
 export const getNeighbors3D = (x, y, z) => {
@@ -129,7 +109,9 @@ export const changeArray = (arr, i, value) => {
 };
 
 export const randomFill = (world) => {
-  // map through each cell from "world",
+  // Take a 3D array (world), then map through each 2D array (plane), then map through each 1D array (row):
   // fill each cell with a 1 or 0 (Math.round(Math.random()))
-  return world.map((row) => row.map((cell) => Math.round(Math.random())));
+  return world.map((plane) =>
+    plane.map((row) => row.map((cell) => Math.round(Math.random())))
+  );
 };

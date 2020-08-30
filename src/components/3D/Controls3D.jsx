@@ -4,6 +4,7 @@ import { Button } from "semantic-ui-react";
 
 const Controls3D = (props) => {
   console.log("Controls3D>props: ", props);
+  const { isPlaying, play, next, stop } = props;
   return (
     <div>
       <div className="controls">
@@ -24,12 +25,12 @@ const Controls3D = (props) => {
           content="Next"
           icon="right arrow"
           labelPosition="right"
-          onClick={props.next}
+          onClick={next}
         />
-        {!props.isPlaying ? (
-          <Button content="Play" icon="redo" onClick={props.play} />
+        {!isPlaying ? (
+          <Button content="Play" icon="redo" onClick={play} />
         ) : (
-          <Button content="Stop" icon="redo" onClick={props.stop} />
+          <Button content="Stop" icon="redo" onClick={stop} />
         )}
       </div>
     </div>

@@ -23,7 +23,6 @@ const Settings3D = (props) => {
   });
 
   const onLoad = () => {
-    console.log("onLoad: ", settings);
     return load(settings, rules);
   };
 
@@ -85,7 +84,6 @@ const Settings3D = (props) => {
       </form>
 
       <Button as="div" labelPosition="left" width="5px">
-        {/* <Presets load={onPreset} isPlaying={isPlaying} /> */}
         <Dropdown
           // styling didn't work until I added <link rel='stylesheet" href='...'/> to the index.html file.
           placeholder="Select a preset"
@@ -95,7 +93,6 @@ const Settings3D = (props) => {
           disabled={isPlaying}
           value={settings.preset}
           onChange={(e, { value }) => {
-            console.log("Presets.jsx:onChange: ", value);
             setSettings({ ...settings, preset: `${value}` });
           }}
         />
@@ -107,7 +104,6 @@ const Settings3D = (props) => {
           disabled={isPlaying}
           value={settings.colorStyle}
           onChange={(e, { value }) => {
-            console.log("Settings3D.jsx:onChange: ", value);
             setSettings({ ...settings, colorStyle: `${value}` });
           }}
         />
@@ -119,7 +115,6 @@ const Settings3D = (props) => {
           disabled={isPlaying}
           value={settings.gridSize}
           onChange={(e, { value }) => {
-            console.log("Settings3D.jsx:onChange: ", value);
             setSettings({ ...settings, gridSize: value });
           }}
         />
@@ -131,7 +126,6 @@ const Settings3D = (props) => {
           disabled={isPlaying}
           value={settings.generationSpeed}
           onChange={(e, { value }) => {
-            console.log("Settings3D.jsx:onChange: ", value);
             setSettings({ ...settings, generationSpeed: value });
           }}
         />
