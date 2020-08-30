@@ -1,15 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import ThreePointVis from "./ThreePointVis.jsx";
-// import ThreePointVis_Tut from "./ThreePointVis_Tut.jsx";
 import Controls3D from "./Controls3D.jsx";
 import Settings3D from "./Settings3D.jsx";
 
-import {
-  createWorld,
-  create3DWorld,
-  nextGen,
-  randomFill,
-} from "../files/game3D.jsx";
+import { createWorld, nextGen, randomFill } from "../files/game3D.jsx";
 import { loadPreset } from "../files/presets3D.jsx";
 
 import "./styles3D.css";

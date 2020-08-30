@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
 import GameClass from "./components/Game/GameClass.jsx";
-import { Divider, Header, Button } from "semantic-ui-react";
-import { Game3D } from "./components/3D/Game3D.jsx";
 import Game3DClass from "./components/3D/Game3DClass.jsx";
 
 import Rules from "./components/Rules.jsx";

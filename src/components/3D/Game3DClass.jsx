@@ -1,22 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import ThreePointVis from "./ThreePointVis.jsx";
-// import ThreePointVis_Tut from "./ThreePointVis_Tut.jsx";
 import Controls3D from "./Controls3D.jsx";
 import Settings3D from "./Settings3D.jsx";
 
-import {
-  createWorld,
-  create3DWorld,
-  nextGen,
-  randomFill,
-} from "../files/game3D.jsx";
+import { createWorld, nextGen, randomFill } from "../files/game3D.jsx";
 import { loadPreset } from "../files/presets3D.jsx";
 
 import "./styles3D.css";
 
 class Game3DClass extends React.Component {
   state = {
-    // world3D: loadPreset("line"),
     world3D: loadPreset("plane"),
     generation: 0,
     isPlaying: false,
@@ -24,13 +17,11 @@ class Game3DClass extends React.Component {
   };
 
   changeState = (props) => {
-    // console.log("3d changestate: ", props);
     const { world3D, generation } = props;
     this.setState({ ...this.state, world3D: world3D, generation: generation });
   };
 
   onChange = (world) => {
-    // console.log("onChange: ", world);
     this.changeState({ world3D: world, generation: this.state.generation + 1 });
   };
 
@@ -42,13 +33,7 @@ class Game3DClass extends React.Component {
     }, 500);
   };
 
-  // useEffect(() => {
-  //   console.log("useEffect...");
-  //   let interval = setInterval(() => onNext(), 500);
-  // });
-
   onNext = () => {
-    // console.log("onNext: ", state.world3D);
     this.onChange(nextGen(this.state.world3D));
   };
 
@@ -59,7 +44,6 @@ class Game3DClass extends React.Component {
   };
 
   onSettingStyle = (settings, rules) => {
-    // console.log("onsettings: ", settings, rules);
     const { colorStyle, gridSize, preset, generationSpeed } = settings;
     this.setState({
       ...this.state,
@@ -80,7 +64,6 @@ class Game3DClass extends React.Component {
     this.changeState({ world3D: createWorld(), generation: 0 });
   };
 
-  // console.log("state:", state);
   render() {
     return (
       <div className="container-3D">
