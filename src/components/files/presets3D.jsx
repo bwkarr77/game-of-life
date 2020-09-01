@@ -1,38 +1,20 @@
-import { ALIVE, WORLD_SIZE, createWorld } from "./game3D.jsx";
+// import { ALIVE, WORLD_SIZE_3D, create3DWorld } from "./game3D.jsx";
+import { ALIVE, WORLD_SIZE_3D, createWorld } from "./game3D.jsx";
 
 export const presetOptions = [
   { key: "box", value: "box", text: "Box" },
   { key: "plane", value: "plane", text: "plane" },
-  { key: "cross", value: "cross", text: "Cross" },
+  // { key: "cross", value: "cross", text: "Cross" },
   // { key: "thickCross", value: "thickCross", text: "Thick Cross" },
-  // { key: "plus", value: "plus", text: "Plus" },
+  { key: "plus", value: "plus", text: "Plus" },
   // { key: "glider", value: "glider", text: "Glider" },
-  // { key: "pulsar", value: "pulsar", text: "Pulsar" },
-  // { key: "diehard", value: "diehard", text: "Diehard" },
-  // {
-  //   key: "gliderGunSE",
-  //   value: "gliderGunSE",
-  //   text: "Gosper Glider Gun (SE)",
-  // },
-  // {
-  //   key: "gliderGunNE",
-  //   value: "gliderGunNE",
-  //   text: "Gosper Glider Gun (NE)",
-  // },
-  // {
-  //   key: "duelingGliderGuns",
-  //   value: "duelingGliderGuns",
-  //   text: "Gosper Gliders Dueling",
-  // },
-  // { key: "infiniteGrowth", value: "infiniteGrowth", text: "Infinite Growth" },
-  // { key: "testingPatterns", value: "testingPatterns", text: "testingPatterns" },
 ];
 
 export const loadPreset = (preset) => {
   let newWorld = createWorld();
-  const half = Math.floor(WORLD_SIZE / 2);
-  console.log("presets.jsx>loadPreset", preset);
-  switch (preset) {
+  const half = Math.floor(WORLD_SIZE_3D / 2);
+  console.log("presets3D.jsx>loadPreset", preset);
+  switch (preset.toLowerCase()) {
     case "box":
       return box(newWorld, half);
     case "plane":
@@ -119,10 +101,11 @@ const toMirror = (world, i, x, y, axis) => {
 
 const box = (world, half) => {
   // 3d works
-  const boxSize = 3;
-  for (let i = 0; i < boxSize; i++) {
-    for (let j = 0; j < boxSize; j++) {
-      for (let k = 0; k < boxSize; k++) {
+  const start = Math.ceil(half / 2);
+  const boxSize = half + start;
+  for (let i = start; i < boxSize; i++) {
+    for (let j = start; j < boxSize; j++) {
+      for (let k = start; k < boxSize; k++) {
         world[i][j][k] = ALIVE;
       }
     }
@@ -142,7 +125,7 @@ const plane = (world, half) => {
 
 const plus = (world, half) => {
   //3d works
-  for (let i = 0; i < WORLD_SIZE; i++) {
+  for (let i = 0; i < WORLD_SIZE_3D; i++) {
     world[i][half][half] = ALIVE;
     world[half][i][half] = ALIVE;
     world[half][half][i] = ALIVE;
@@ -171,7 +154,7 @@ const thickCross = (world, half) => {
 };
 
 const glider = (world, startX, startY) => {
-  const half = Math.floor(WORLD_SIZE / 2);
+  const half = Math.floor(WORLD_SIZE_3D / 2);
   const x = half;
   const y = half;
   world[x][y] = ALIVE;

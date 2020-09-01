@@ -17,7 +17,7 @@ const Rules = () => {
         </p>
         <span>Where:</span>
         <p className="rules-p">
-          <ul className="rules-generic">
+          <ul className="generic">
             <li>
               E<sub>l</sub>&#x2264; E &#8804;<sub>u</sub> = Rules for a LIVING
               cell to stay ALIVE

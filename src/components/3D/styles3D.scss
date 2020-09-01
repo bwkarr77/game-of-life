@@ -1,0 +1,56 @@
+.container-3D {
+  width: 99%;
+  /* background-color: tomato; */
+}
+
+.vis-container {
+  width: 90%;
+  margin: auto;
+  height: 55vh;
+  border: 2px solid white;
+}
+
+.label {
+  width: 5px;
+  color: red;
+}
+
+.label_grid {
+  /* background-color: red !important; */
+  width: 1px !important;
+}
+
+.controls-3D {
+  display: flex;
+  flex-direction: row;
+}
+
+.rules {
+  background-color: lightskyblue;
+  height: 30px;
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+
+  input {
+    width: 50px;
+  }
+}
+
+.settings-3D {
+  margin: 15px auto;
+  background-color: magenta;
+  width: 50%;
+}
+.set-3D-div {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+
+  #preset,
+  #colorStyle,
+  #gridSize,
+  #generationSpeed {
+    width: 40%;
+  }
+}

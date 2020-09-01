@@ -12,7 +12,12 @@ const Home = () => {
         grid), that is populated by living or dead cells, and each cell lives or
         dies based on conditions. Living cells are represented by an "on" state
         (typically highlighted, filled in, or colored cells), and dead cells are
-        represented by a "dead" state
+        represented by a "dead" state.
+      </p>
+      <p>
+        The original start of this project was to implement a 2D design to
+        represent the Game of Life. After completing the 2D portion, I decided
+        to tackle the implementation of a 3D grid. I hope you enjoy!
       </p>
       <span>For this App, I implemented:</span>
       <ul>

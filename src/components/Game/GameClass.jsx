@@ -80,7 +80,7 @@ class Game extends React.Component {
 
     UseStyling(colorStyle);
 
-    setUpdate(!update);
+    // setUpdate(!update);
   };
 
   render() {

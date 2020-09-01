@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import ThreePointVis from "./ThreePointVis.jsx";
 import Controls3D from "./Controls3D.jsx";
 import Settings3D from "./Settings3D.jsx";
+import Rules from "../settings/Rules.jsx";
 
 import { createWorld, nextGen, randomFill } from "../files/game3D.jsx";
 import { loadPreset } from "../files/presets3D.jsx";
 
-import "./styles3D.css";
+import "./styles3D.scss";
 
 export const Game3D = (props) => {
   const [state3D, setState3D] = useState({
@@ -71,9 +72,30 @@ export const Game3D = (props) => {
     changeState({ world3D: createWorld(), generation: 0 });
   };
 
+  //for the Rules component...
+  const onSubmit = (props) => {
+    props.preventDefault();
+    console.log("onSubmit", rules);
+  };
+  const onChangeRules = (id, val) => {
+    console.log("onChangeRules: ", id, val);
+    setRules({
+      ...rules,
+      [id]: parseInt(val),
+    });
+  };
+
   // console.log("state3D:", state3D);
   return (
     <div className="container-3D">
+      {/* put Rules component into here */}
+
+      <Rules
+        onSubmit={onSubmit}
+        onChangeRules={onChangeRules}
+        rules={rules}
+        setRules={setRules}
+      />
       <Settings3D isPlaying={state3D.isPlaying} load={onSettingStyle} />
       <div className="vis-container">
         <ThreePointVis world={state3D.world3D} />
