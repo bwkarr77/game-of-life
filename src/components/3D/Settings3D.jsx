@@ -1,29 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dropdown, Button } from "semantic-ui-react";
 // import Presets from "./Presets.jsx";
 
 import {
   colorOptions,
   gridSizeOptions,
+  grid3DSizeOptions,
   generationSpeed,
 } from "../files/settings.jsx";
 import { loadPreset, presetOptions } from "../files/presets3D.jsx";
 
-import "./styles3D.css";
+import "./styles3D.scss";
 
 const Settings3D = (props) => {
   console.log("settings3d: ", props);
-  const { load, isPlaying } = props;
+  const { load, isPlaying, styleChange, changeStyle } = props;
+  // const { gridSize, generationSpeed, colorStyle } = props.state;
 
   const [settings, setSettings] = useState({
-    preset: "box",
-    colorStyle: "purple",
-    gridSize: 70,
-    generationSpeed: 100,
+    preset: "",
+    colorStyle: "",
+    gridSize: "",
+    generationSpeed: "",
   });
 
   const onLoad = () => {
-    return load(settings, rules);
+    return styleChange(settings);
   };
 
   const [rules, setRules] = useState({
@@ -34,6 +36,7 @@ const Settings3D = (props) => {
   });
 
   const onChangeRules = (id, val) => {
+    console.log("onChangeRules: ", id, val);
     setRules({
       ...rules,
       [id]: parseInt(val),
@@ -41,55 +44,21 @@ const Settings3D = (props) => {
   };
 
   // const onChangeRules = (e, value) =>
-  const onSubmit = (props) => {
-    props.preventDefault();
-    console.log("onSubmit", rules);
-  };
+  // const onSubmit = (props) => {
+  //   props.preventDefault();
+  //   console.log("onSubmit", rules);
+  // };
 
   return (
-    <div className="controls">
-      <form className="rules" onSubmit={onSubmit}>
-        <label>a</label>
-        <input
-          id="a"
-          className="rule_input"
-          value={rules.a}
-          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
-        />
-        <label>b: </label>
-        <input
-          id="b"
-          type="text"
-          className="rule_input"
-          value={rules.b}
-          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
-        />
-        <label>c: </label>
-        <input
-          id="c"
-          type="text"
-          className="rule_input"
-          value={rules.c}
-          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
-        />
-        <label>d: </label>
-        <input
-          id="d"
-          type="text"
-          className="rule_input"
-          value={rules.d}
-          onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
-        />
-        <button>Submit</button>
-      </form>
-
-      <Button as="div" labelPosition="left" width="5px">
+    <div className="settings-3D">
+      <Button as="div" labelPosition="left" className="set-3D-div">
         <Dropdown
           // styling didn't work until I added <link rel='stylesheet" href='...'/> to the index.html file.
+          id="preset"
           placeholder="Select a preset"
           options={presetOptions}
           selection
-          className="label"
+          className="label_setting"
           disabled={isPlaying}
           value={settings.preset}
           onChange={(e, { value }) => {
@@ -97,10 +66,11 @@ const Settings3D = (props) => {
           }}
         />
         <Dropdown
+          id="colorStyle"
           placeholder="Color Theme"
           options={colorOptions}
           selection
-          className="label"
+          className="label_setting"
           disabled={isPlaying}
           value={settings.colorStyle}
           onChange={(e, { value }) => {
@@ -108,8 +78,9 @@ const Settings3D = (props) => {
           }}
         />
         <Dropdown
+          id="gridSize"
           placeholder="Grid Size"
-          options={gridSizeOptions}
+          options={grid3DSizeOptions}
           selection
           className="label_grid"
           disabled={isPlaying}
@@ -119,10 +90,11 @@ const Settings3D = (props) => {
           }}
         />
         <Dropdown
+          id="generationSpeed"
           placeholder="Generation Speed"
           options={generationSpeed}
           selection
-          className="label"
+          className="label_setting"
           disabled={isPlaying}
           value={settings.generationSpeed}
           onChange={(e, { value }) => {

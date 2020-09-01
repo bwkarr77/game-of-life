@@ -5,43 +5,46 @@ import Settings3D from "./Settings3D.jsx";
 import Rules from "../settings/Rules.jsx";
 
 import {
-  // globals:
-  // WORLD_SIZE_3D,
-  // GEN_TIME_3D,
+  // variables:
+  WORLD_SIZE_3D,
+  GEN_TIME_3D,
   // functions:
   createWorld,
   nextGen,
   randomFill,
-  get3DWorldSize,
-  get3DSpeed,
+  setSpeed,
+  setWorldSize,
+  setRules,
 } from "../files/game3D.jsx";
 import { loadPreset } from "../files/presets3D.jsx";
 
 import "./styles3D.scss";
 
-class Game3DClass extends React.Component {
+class Game3DClassTest extends React.Component {
   state = {
     world3D: loadPreset("plane"),
-    // gridSize: WORLD_SIZE_3D,
     generation: 0,
-    // generationSpeed: GEN_TIME_3D,
     isPlaying: false,
     colorStyle: "default",
-    rules: { a: 4, b: 5, c: 5, d: 5 },
+    generationSpeed: GEN_TIME_3D,
+    gridSize: WORLD_SIZE_3D,
+    rules: { El: 5, Eu: 6, Fl: 6, Fu: 6 },
   };
 
   changeState = (props) => {
+    console.log("changeState: ", props);
     const { world3D, generation } = props;
-    this.setState({ ...this.state, world3D: world3D, generation: generation });
+    this.setState({ world3D: world3D, generation: generation });
   };
 
   onChange = (world) => {
+    console.log("onChange: ", world);
     this.changeState({ world3D: world, generation: this.state.generation + 1 });
   };
 
   onPlay = () => {
-    // console.log("3D onPlay: ", this.state.world3D);
-    this.setState({ ...this.state, isPlaying: true });
+    console.log("3D onPlay: ", this.state.world3D);
+    this.setState({ isPlaying: true });
     this.interval = setInterval(() => {
       this.onNext();
     }, 500);
@@ -53,24 +56,22 @@ class Game3DClass extends React.Component {
 
   onStop = () => {
     console.log("onStop...");
-    this.setState({ ...this.state, isPlaying: false });
+    this.setState({ isPlaying: false });
     clearInterval(this.interval);
   };
 
-  onSettingStyle = (settings, rules) => {
+  onSettingStyle = (settings) => {
     const { colorStyle, gridSize, preset, generationSpeed } = settings;
-    console.log("settings3D: ", settings, gridSize);
+
+    setWorldSize(gridSize);
+    setSpeed(generationSpeed);
+
     this.setState({
-      ...this.state,
-      world3D: loadPreset(`${preset}`),
-      generationSpeed: generationSpeed,
-      colorStyle: `${colorStyle}`,
+      world3D: loadPreset(preset),
+      generation: generationSpeed,
+      colorStyle: colorStyle,
       gridSize: gridSize,
     });
-
-    // set speed and world size
-    get3DSpeed(generationSpeed);
-    get3DWorldSize(gridSize);
   };
 
   onShuffle = () => {
@@ -84,9 +85,7 @@ class Game3DClass extends React.Component {
     this.changeState({ world3D: createWorld(), generation: 0 });
   };
 
-  // for Rules.jsx:
   onChangeRules = (id, val) => {
-    console.log("onChangeRules: ", id, val);
     this.setState({
       ...this.state,
       rules: {
@@ -95,35 +94,34 @@ class Game3DClass extends React.Component {
       },
     });
   };
-  onSetRules = (rules) => {
-    rules.preventDefault();
-    console.log("setRules: ", rules, this.state, this.state.rules);
-    this.setState({
-      ...this.state,
-      rules: {
-        ...this.state.rules,
-        rules: rules,
-      },
-    });
+
+  onSetRules = (e) => {
+    e.preventDefault();
+    setRules(this.state.rules); // currently not changing the rules....
   };
 
   render() {
-    console.log("Game3DClass.jsx: ", this.state);
+    // console.log("3D World: ", this.state);
     return (
       <div className="container-3D">
-        <Rules
-          rules={this.state.rules}
-          onChangeRules={this.onChangeRules}
-          load={this.onSetRules}
-        />
-        <Settings3D
-          isPlaying={this.state.isPlaying}
-          load={this.onSettingStyle}
-          state={this.state}
-        />
+        <div className="controls-3D">
+          <Rules
+            rules={this.state.rules}
+            onChangeRules={this.onChangeRules}
+            load={this.onSetRules}
+          />
+          <Settings3D
+            isPlaying={this.state.isPlaying}
+            load={this.onSettingStyle}
+            state={this.state}
+            styleChange={this.onSettingStyle}
+            changeStyle={this.onChangeStyle}
+          />
+        </div>
         <div className="vis-container">
           <ThreePointVis world={this.state.world3D} />
         </div>
+        <p>Generation: {this.state.generation}</p>
         <Controls3D
           isPlaying={this.state.isPlaying}
           play={this.onPlay}
@@ -137,4 +135,4 @@ class Game3DClass extends React.Component {
   }
 }
 
-export default Game3DClass;
+export default Game3DClassTest;

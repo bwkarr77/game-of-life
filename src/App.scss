@@ -87,6 +87,11 @@
     color: black;
     opacity: 1;
   }
+
+  ul {
+    list-style-type: none;
+    padding: 0px;
+  }
 }
 
 .rules-list {
@@ -97,6 +102,6 @@
   text-align: left;
 }
 
-.rules-generic {
-  list-style-type: none;
-}
+// .generic {
+//   list-style-type: none;
+// }
