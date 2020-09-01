@@ -50,8 +50,9 @@ const Settings3D = (props) => {
   // };
 
   return (
-    <div className="settings-3D">
-      <Button as="div" labelPosition="left" className="set-3D-div">
+    <div className="settings">
+      {/* <Button as="div" labelPosition="left" className="set-3D-div"> */}
+      <div className="settings-sect">
         <Dropdown
           // styling didn't work until I added <link rel='stylesheet" href='...'/> to the index.html file.
           id="preset"
@@ -77,12 +78,14 @@ const Settings3D = (props) => {
             setSettings({ ...settings, colorStyle: `${value}` });
           }}
         />
+      </div>
+      <div className="settings-sect">
         <Dropdown
           id="gridSize"
           placeholder="Grid Size"
           options={grid3DSizeOptions}
           selection
-          className="label_grid"
+          className="label_setting"
           disabled={isPlaying}
           value={settings.gridSize}
           onChange={(e, { value }) => {
@@ -101,8 +104,14 @@ const Settings3D = (props) => {
             setSettings({ ...settings, generationSpeed: value });
           }}
         />
-        <Button content="Load" onClick={onLoad} disabled={isPlaying} />
-      </Button>
+      </div>
+      <Button
+        id="setting-load"
+        content="Load"
+        onClick={onLoad}
+        disabled={isPlaying}
+      />
+      {/* </Button> */}
     </div>
   );
 };

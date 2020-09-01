@@ -104,7 +104,7 @@ class Game3DClassTest extends React.Component {
     // console.log("3D World: ", this.state);
     return (
       <div className="container-3D">
-        <div className="controls-3D">
+        <div className="settings-div">
           <Rules
             rules={this.state.rules}
             onChangeRules={this.onChangeRules}
