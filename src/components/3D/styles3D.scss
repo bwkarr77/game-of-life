@@ -25,32 +25,40 @@
   flex-direction: row;
 }
 
-.rules {
+.settings-div {
+  display: inline-block;
   background-color: lightskyblue;
-  height: 30px;
-  width: 50%;
-  display: flex;
-  flex-wrap: wrap;
+  margin: 20px;
+  justify-content: center;
 
-  input {
-    width: 50px;
-  }
-}
+  .settings {
+    display: inline-block;
+    margin: 0 10px;
+    border: 1px solid black;
 
-.settings-3D {
-  margin: 15px auto;
-  background-color: magenta;
-  width: 50%;
-}
-.set-3D-div {
-  display: flex;
-  flex-wrap: wrap;
-  width: 80%;
+    .settings-sect {
+      margin: 5px 0px !important;
+    }
 
-  #preset,
-  #colorStyle,
-  #gridSize,
-  #generationSpeed {
-    width: 40%;
+    input {
+      margin: 0 5px;
+      width: 50px;
+      border-radius: 13%;
+      font-size: 15px;
+      height: 36px;
+      text-align: center;
+    }
+
+    #preset,
+    #colorStyle,
+    #gridSize,
+    #generationSpeed {
+      width: 40%;
+
+      #setting-load {
+        width: 50%;
+        margin: auto;
+      }
+    }
   }
 }
