@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink as Link,
-} from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 
-import { Divider, Header, Button } from "semantic-ui-react";
+import { Header, Button } from "semantic-ui-react";
 // import "./Navbar.css";
 
 const Navbar = () => {

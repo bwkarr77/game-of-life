@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import Controls from "./Controls.jsx";
 import Grid from "./Grid.jsx";
@@ -29,7 +29,7 @@ class Game extends React.Component {
   };
 
   changeState = (props) => {
-    const { world, generation, color } = props;
+    const { world, generation } = props;
     this.setState({
       world: world,
       generation: generation,
@@ -64,7 +64,6 @@ class Game extends React.Component {
 
   // loads settings
   onSettingStyle = (settings) => {
-    const { update, setUpdate } = this.props;
     const { gridSize, colorStyle, generationSpeed, preset } = settings;
 
     getWorldSize(gridSize);
@@ -79,12 +78,10 @@ class Game extends React.Component {
     });
 
     UseStyling(colorStyle);
-
-    // setUpdate(!update);
   };
 
   render() {
-    // console.log("GameClass: ", this.state);
+    console.log("GameClass: ", this.state);
     return (
       <div className="game">
         <Grid
