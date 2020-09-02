@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Dropdown, Button } from "semantic-ui-react";
 // import Presets from "./Presets.jsx";
 
 import {
   colorOptions,
-  gridSizeOptions,
+  // gridSizeOptions,
   grid3DSizeOptions,
   generationSpeed,
 } from "../files/settings.jsx";
-import { loadPreset, presetOptions } from "../files/presets3D.jsx";
+import { presetOptions } from "../files/presets3D.jsx";
 
 import "./styles3D.scss";
 
 const Settings3D = (props) => {
   console.log("settings3d: ", props);
-  const { load, isPlaying, styleChange, changeStyle } = props;
+  const { isPlaying, styleChange } = props;
   // const { gridSize, generationSpeed, colorStyle } = props.state;
 
   const [settings, setSettings] = useState({
@@ -35,13 +35,13 @@ const Settings3D = (props) => {
     d: 5,
   });
 
-  const onChangeRules = (id, val) => {
-    console.log("onChangeRules: ", id, val);
-    setRules({
-      ...rules,
-      [id]: parseInt(val),
-    });
-  };
+  // const onChangeRules = (id, val) => {
+  //   console.log("onChangeRules: ", id, val);
+  //   setRules({
+  //     ...rules,
+  //     [id]: parseInt(val),
+  //   });
+  // };
 
   // const onChangeRules = (e, value) =>
   // const onSubmit = (props) => {

@@ -165,54 +165,50 @@ const glider = (world, startX, startY) => {
   return world;
 };
 
-const pulsar = (world, half) => {
-  for (let i = 2; i <= 4; i++) {
-    world = toMirror(world, half, i, 1, "quad");
-    world = toMirror(world, half, i, 6, "quad");
-    world = toMirror(world, half, 1, i, "quad");
-    world = toMirror(world, half, 6, i, "quad");
-  }
-  return world;
-};
+// const pulsar = (world, half) => {
+//   for (let i = 2; i <= 4; i++) {
+//     world = toMirror(world, half, i, 1, "quad");
+//     world = toMirror(world, half, i, 6, "quad");
+//     world = toMirror(world, half, 1, i, "quad");
+//     world = toMirror(world, half, 6, i, "quad");
+//   }
+//   return world;
+// };
 
-const diehard = (world, half) => {
-  return world;
-};
+// const gliderGunSE = (world, half, x, y) => {
+//   // BLOCKS
+//   world = toBlock(world, half - 18 - x, half + 1 - y);
+//   world = toBlock(world, half + 16 - x, half - 1 - y);
+//   // Left side ship
+//   world = toEgg(world, half - 8 - x, half + 1 - y);
+//   // Right side ship
+//   world = ship1(world, half + 2 - x, half - 1 - y);
+//   return world;
+// };
 
-const gliderGunSE = (world, half, x, y) => {
-  // BLOCKS
-  world = toBlock(world, half - 18 - x, half + 1 - y);
-  world = toBlock(world, half + 16 - x, half - 1 - y);
-  // Left side ship
-  world = toEgg(world, half - 8 - x, half + 1 - y);
-  // Right side ship
-  world = ship1(world, half + 2 - x, half - 1 - y);
-  return world;
-};
+// const gliderGunNE = (world, half, x, y) => {
+//   // BLOCKS
+//   world = toBlock(world, half - 18 - x, half - 1 - y);
+//   world = toBlock(world, half + 16 - x, half + 1 - y);
+//   // Left side ship
+//   world = toEgg(world, half - 8 - x, half - 1 - y);
+//   // Right side ship
+//   world = ship1(world, half + 2 - x, half + 1 - y);
+//   return world;
+// };
 
-const gliderGunNE = (world, half, x, y) => {
-  // BLOCKS
-  world = toBlock(world, half - 18 - x, half - 1 - y);
-  world = toBlock(world, half + 16 - x, half + 1 - y);
-  // Left side ship
-  world = toEgg(world, half - 8 - x, half - 1 - y);
-  // Right side ship
-  world = ship1(world, half + 2 - x, half + 1 - y);
-  return world;
-};
+// const duelingGliderGuns = (world, half) => {
+//   world = gliderGunSE(world, half, 8, 10);
+//   world = gliderGunNE(world, half, 8, -10);
+//   return world;
+// };
 
-const duelingGliderGuns = (world, half) => {
-  world = gliderGunSE(world, half, 8, 10);
-  world = gliderGunNE(world, half, 8, -10);
-  return world;
-};
-
-const infiniteGrowth = (world, half) => {
-  const x = half - 20;
-  world[half].splice(x, 8, 1, 1, 1, 1, 1, 1, 1, 1);
-  world[half].splice(x + 9, 5, 1, 1, 1, 1, 1);
-  world[half].splice(x + 17, 3, 1, 1, 1);
-  world[half].splice(x + 26, 7, 1, 1, 1, 1, 1, 1, 1);
-  world[half].splice(x + 34, 5, 1, 1, 1, 1, 1);
-  return world;
-};
+// const infiniteGrowth = (world, half) => {
+//   const x = half - 20;
+//   world[half].splice(x, 8, 1, 1, 1, 1, 1, 1, 1, 1);
+//   world[half].splice(x + 9, 5, 1, 1, 1, 1, 1);
+//   world[half].splice(x + 17, 3, 1, 1, 1);
+//   world[half].splice(x + 26, 7, 1, 1, 1, 1, 1, 1, 1);
+//   world[half].splice(x + 34, 5, 1, 1, 1, 1, 1);
+//   return world;
+// };
