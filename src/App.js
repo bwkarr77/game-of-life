@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
 import GameClass from "./components/Game/GameClass.jsx";
-// import Game3DClass from "./components/3D/Game3DClass.jsx";
 import Game3DClass from "./components/3D/Game3DClass.jsx";
 
 import Rules from "./components/Rules.jsx";
@@ -26,7 +25,6 @@ function App() {
           <Route
             exact
             path={"/2D"}
-            // component={GameClass(didUpdate, setUpdate)}
             render={() => (
               <GameClass update={didUpdate} setUpdate={setUpdate} />
             )}
@@ -34,8 +32,6 @@ function App() {
           <Route
             exact
             path={"/3D"}
-            // component={Game3D}
-            // render={() => <Game3D update={didUpdate} setUpdate={setUpdate} />}
             render={() => (
               console.log("3D rendering..."),
               (
@@ -44,7 +40,11 @@ function App() {
               )
             )}
           />
-          <Route exact path={"/rules"} render={() => <Rules />} />
+          <Route
+            exact
+            path={"/rules"}
+            render={() => (console.log("Rules renderings..."), (<Rules />))}
+          />
         </Switch>
       </div>
     </div>
