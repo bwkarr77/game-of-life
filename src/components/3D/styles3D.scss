@@ -34,7 +34,7 @@
   .settings {
     display: inline-block;
     margin: 0 10px;
-    border: 1px solid black;
+    // border: 1px solid black;
 
     .settings-sect {
       margin: 5px 0px !important;
@@ -61,4 +61,10 @@
       }
     }
   }
+}
+
+#setting-right {
+  padding-left: 10px;
+  border-left: 2px solid black !important;
+  // border: ;
 }
