@@ -37,8 +37,11 @@ function App() {
             // component={Game3D}
             // render={() => <Game3D update={didUpdate} setUpdate={setUpdate} />}
             render={() => (
-              // <Game3DClass update={didUpdate} setUpdate={setUpdate} />
-              <Game3DClass update={didUpdate} setUpdate={setUpdate} />
+              console.log("3D rendering..."),
+              (
+                // <Game3DClass update={didUpdate} setUpdate={setUpdate} />
+                <Game3DClass update={didUpdate} setUpdate={setUpdate} />
+              )
             )}
           />
           <Route exact path={"/rules"} render={() => <Rules />} />
