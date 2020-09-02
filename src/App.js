@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.scss";
 import GameClass from "./components/Game/GameClass.jsx";
 // import Game3DClass from "./components/3D/Game3DClass.jsx";
-import Game3DClassTest from "./components/3D/Game3DClassTest.jsx";
+import Game3DClass from "./components/3D/Game3DClass.jsx";
 
 import Rules from "./components/Rules.jsx";
 import Home from "./components/Home.jsx";
@@ -38,7 +38,7 @@ function App() {
             // render={() => <Game3D update={didUpdate} setUpdate={setUpdate} />}
             render={() => (
               // <Game3DClass update={didUpdate} setUpdate={setUpdate} />
-              <Game3DClassTest update={didUpdate} setUpdate={setUpdate} />
+              <Game3DClass update={didUpdate} setUpdate={setUpdate} />
             )}
           />
           <Route exact path={"/rules"} render={() => <Rules />} />
