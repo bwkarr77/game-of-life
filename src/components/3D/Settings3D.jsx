@@ -50,7 +50,7 @@ const Settings3D = (props) => {
   // };
 
   return (
-    <div className="settings">
+    <div className="settings" id="setting-right">
       {/* <Button as="div" labelPosition="left" className="set-3D-div"> */}
       <div className="settings-sect">
         <Dropdown

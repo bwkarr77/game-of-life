@@ -3,6 +3,7 @@ import ThreePointVis from "./ThreePointVis.jsx";
 import Controls3D from "./Controls3D.jsx";
 import Settings3D from "./Settings3D.jsx";
 import Rules from "../settings/Rules.jsx";
+import { Divider } from "semantic-ui-react";
 
 import {
   // variables:
