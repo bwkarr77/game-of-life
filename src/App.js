@@ -8,17 +8,10 @@ import Rules from "./components/Rules.jsx";
 import Home from "./components/Home.jsx";
 
 import Navbar from "./components/Navbar.jsx";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 function App() {
   const [didUpdate, setUpdate] = useState(false);
-
-  // dimension is true = 2D; dimension is false = 3D
-  const [dimension, setDimension] = useState(true);
-
-  const onDimension = () => {
-    setDimension(!dimension);
-  };
 
   useEffect(() => {
     console.log("did update");
@@ -51,7 +44,6 @@ function App() {
           <Route exact path={"/rules"} render={() => <Rules />} />
         </Switch>
       </div>
-      {/* </Router> */}
     </div>
   );
 }
