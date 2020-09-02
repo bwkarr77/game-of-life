@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.scss";
+import "./App.css";
 import GameClass from "./components/Game/GameClass.jsx";
 // import Game3DClass from "./components/3D/Game3DClass.jsx";
 import Game3DClass from "./components/3D/Game3DClass.jsx";
