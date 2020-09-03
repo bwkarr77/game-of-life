@@ -10,7 +10,6 @@ const cam = {
 };
 
 const ThreePointVis = ({ world }) => {
-  console.log("3point vis, world3d: ", world);
   return (
     <Canvas camera={{ position: [cam.x, cam.y, cam.z] }}>
       <Controls />

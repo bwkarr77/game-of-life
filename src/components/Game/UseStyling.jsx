@@ -14,13 +14,11 @@ const setCustClass = (name, styling, def) => {
     for (let i = 0; i < element.length; i++) {
       element[i].className = `${def}`;
       element[i].classList.add(`${styling}_nav`);
-      // console.log("setCustClass: ", element);
     }
   } else {
     for (let i = 0; i < element.length; i++) {
       element[i].className = `${def}`;
       element[i].classList.add(`${styling}`);
-      // console.log("setCustClass: ", element);
     }
   }
 };

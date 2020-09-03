@@ -33,18 +33,10 @@ function App() {
             exact
             path={"/3D"}
             render={() => (
-              console.log("3D rendering..."),
-              (
-                // <Game3DClass update={didUpdate} setUpdate={setUpdate} />
-                <Game3DClass update={didUpdate} setUpdate={setUpdate} />
-              )
+              <Game3DClass update={didUpdate} setUpdate={setUpdate} />
             )}
           />
-          <Route
-            exact
-            path={"/rules"}
-            render={() => (console.log("Rules renderings..."), (<Rules />))}
-          />
+          <Route exact path={"/rules"} render={() => <Rules />} />
         </Switch>
       </div>
     </div>

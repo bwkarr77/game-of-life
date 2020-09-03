@@ -1,5 +1,5 @@
 export let WORLD_SIZE_3D = 5; //make this changeable
-export let GEN_TIME_3D = 1000; //milliseconds until next generation
+export let GEN_TIME_3D = 500; //milliseconds until next generation
 export const ALIVE = 1;
 export const DEAD = 0;
 export let RULES = {
@@ -107,7 +107,6 @@ export const aliveNeighbors = (world, x, y, z) => {
 
 export const nextGen = (world) => {
   let newWorld = createWorld();
-  // console.log("nextGen: ", newWorld, world);
   for (let x = 0; x < WORLD_SIZE_3D; x++) {
     for (let y = 0; y < WORLD_SIZE_3D; y++) {
       for (let z = 0; z < WORLD_SIZE_3D; z++) {
@@ -241,7 +240,6 @@ export const nextGen = (world) => {
       for (let z = 0; z < WORLD_SIZE_3D; z++) {
         const alive = aliveNeighbors(world, x, y, z);
         const cell = world[x][y][z];
-        // console.log("nextGen, aliveNeighbor:", alive, cell);
         newWorld[x][y][z] =
           // 4333 relates to
           alive === 4 || (alive === 5 && cell === ALIVE) ? ALIVE : DEAD;
@@ -252,7 +250,6 @@ export const nextGen = (world) => {
 };
 
 export const changeArray = (arr, i, value) => {
-  // console.log("changeArray: ", arr, i, value);
   return [...arr.slice(0, i), value, ...arr.slice(i + 1)];
 };
 

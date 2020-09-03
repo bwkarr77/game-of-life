@@ -3,7 +3,7 @@ import { ALIVE, WORLD_SIZE_3D, createWorld } from "./game3D.jsx";
 
 export const presetOptions = [
   { key: "box", value: "box", text: "Box" },
-  { key: "plane", value: "plane", text: "plane" },
+  { key: "plane", value: "plane", text: "Plane" },
   // { key: "cross", value: "cross", text: "Cross" },
   // { key: "thickCross", value: "thickCross", text: "Thick Cross" },
   { key: "plus", value: "plus", text: "Plus" },
@@ -13,7 +13,6 @@ export const presetOptions = [
 export const loadPreset = (preset) => {
   let newWorld = createWorld();
   const half = Math.floor(WORLD_SIZE_3D / 2);
-  console.log("presets3D.jsx>loadPreset", preset);
   switch (preset.toLowerCase()) {
     case "box":
       return box(newWorld, half);
@@ -115,9 +114,7 @@ const box = (world, half) => {
 
 const plane = (world, half) => {
   // 3d works
-  // console.log("plane: ", world, world[half], world[1][1][1]);
   world[half].map((row, j) => {
-    // console.log("plane, row:", row);
     return world[half][j].fill(ALIVE);
   });
   return world;

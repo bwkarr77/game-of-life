@@ -13,7 +13,6 @@ const Presets = (props) => {
     return preset ? load(preset) : null;
   };
 
-  // console.log("Presets: ", preset, presetOptions);
   return (
     <div className="controls">
       <Button as="div" labelPosition="left">
@@ -26,7 +25,6 @@ const Presets = (props) => {
           disabled={isPlaying}
           value={preset}
           onChange={(e, { value }) => {
-            console.log("Presets.jsx:onChange: ", value);
             setPreset(`${value}`);
           }}
         />

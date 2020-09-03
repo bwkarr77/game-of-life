@@ -4,7 +4,6 @@ export const ALIVE = 1;
 export const DEAD = 0;
 
 export const getWorldSize = (gridSize) => {
-  console.log("getWorldSize: ", gridSize, WORLD_SIZE);
   WORLD_SIZE = gridSize;
   return WORLD_SIZE;
 };
@@ -31,7 +30,6 @@ export const getNeighbors = (x, y) => {
     [x + 1, y],
     [x + 1, y + 1],
   ].filter((cell) => {
-    // console.log("getNeighbors: ", cell[0], cell[1]);
     // if x and y of cell are greater than 0 and inside the world perimeter:
     return (
       cell[0] >= 0 &&
@@ -44,13 +42,11 @@ export const getNeighbors = (x, y) => {
 
 export const aliveNeighbors = (world, x, y) => {
   return getNeighbors(x, y).filter((living) => {
-    // console.log("living: ", living[0], living[1], world[living[0]][living[1]]);
     return world[living[0]][living[1]] === ALIVE;
   }).length;
 };
 
 export const nextGen = (world) => {
-  // console.log("nextGen: ", world);
   let newWorld = createWorld();
   for (let x = 0; x < WORLD_SIZE; x++) {
     for (let y = 0; y < WORLD_SIZE; y++) {
@@ -64,7 +60,6 @@ export const nextGen = (world) => {
 };
 
 export const changeArray = (arr, i, value) => {
-  // console.log("changeArray: ", arr, i, value);
   return [...arr.slice(0, i), value, ...arr.slice(i + 1)];
 };
 

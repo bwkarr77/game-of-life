@@ -1,9 +1,9 @@
 import React from "react";
 import ThreePointVis from "./ThreePointVis.jsx";
 import Controls3D from "./Controls3D.jsx";
-import Settings3D from "./Settings3D.jsx";
+import Settings from "../settings/Settings.jsx";
 import Rules from "../settings/Rules.jsx";
-import { Divider } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 import {
   // variables:
@@ -17,7 +17,13 @@ import {
   setWorldSize,
   setRules,
 } from "../files/game3D.jsx";
-import { loadPreset } from "../files/presets3D.jsx";
+import { loadPreset, presetOptions } from "../files/presets3D.jsx";
+import {
+  colorOptions,
+  // gridSizeOptions,
+  grid3DSizeOptions,
+  // generationSpeed,
+} from "../files/settings.jsx";
 
 import "./styles3D.scss";
 
@@ -26,6 +32,7 @@ class Game3DClassTest extends React.Component {
     world3D: loadPreset("plane"),
     generation: 0,
     isPlaying: false,
+    showSettings: false,
     colorStyle: "default",
     generationSpeed: GEN_TIME_3D,
     gridSize: WORLD_SIZE_3D,
@@ -33,18 +40,15 @@ class Game3DClassTest extends React.Component {
   };
 
   changeState = (props) => {
-    console.log("changeState: ", props);
     const { world3D, generation } = props;
     this.setState({ world3D: world3D, generation: generation });
   };
 
   onChange = (world) => {
-    console.log("onChange: ", world);
     this.changeState({ world3D: world, generation: this.state.generation + 1 });
   };
 
   onPlay = () => {
-    console.log("3D onPlay: ", this.state.world3D);
     this.setState({ isPlaying: true });
     this.interval = setInterval(() => {
       this.onNext();
@@ -56,7 +60,6 @@ class Game3DClassTest extends React.Component {
   };
 
   onStop = () => {
-    console.log("onStop...");
     this.setState({ isPlaying: false });
     clearInterval(this.interval);
   };
@@ -98,26 +101,44 @@ class Game3DClassTest extends React.Component {
 
   onSetRules = (e) => {
     e.preventDefault();
-    setRules(this.state.rules); // currently not changing the rules....
+    setRules(this.state.rules);
+  };
+
+  onShowSettings = () => {
+    this.setState({
+      showSettings: !this.state.showSettings,
+    });
   };
 
   render() {
-    // console.log("3D World: ", this.state);
     return (
       <div className="container-3D">
         <div className="settings-div">
-          <Rules
-            rules={this.state.rules}
-            onChangeRules={this.onChangeRules}
-            load={this.onSetRules}
+          <Button
+            id="settings-display"
+            content="Show Settings"
+            onClick={this.onShowSettings}
           />
-          <Settings3D
-            isPlaying={this.state.isPlaying}
-            load={this.onSettingStyle}
-            state={this.state}
-            styleChange={this.onSettingStyle}
-            changeStyle={this.onChangeStyle}
-          />
+          {this.state.showSettings ? (
+            <div className="rules-settings">
+              <Rules
+                rules={this.state.rules}
+                onChangeRules={this.onChangeRules}
+                load={this.onSetRules}
+              />
+              <Settings
+                isPlaying={this.state.isPlaying}
+                load={this.onSettingStyle}
+                state={this.state}
+                valIn={["plane", "default", 5, 500]}
+                preset={{
+                  presets: presetOptions,
+                  colors: colorOptions,
+                  grid: grid3DSizeOptions,
+                }}
+              />
+            </div>
+          ) : null}
         </div>
         <div className="vis-container">
           <ThreePointVis world={this.state.world3D} />

@@ -16,7 +16,6 @@ const Game = () => {
   });
 
   const changeState = (world, nextGen) => {
-    // console.log("changeState: ", world, nextGen);
     setState({
       world: world,
       generation: nextGen,
@@ -43,8 +42,6 @@ const Game = () => {
 
   // move to the next generation
   const onNext = () => onChange(nextGen(state.world));
-
-  console.log("GAME>state: ", state);
 
   return (
     // <GridContext.Provider value={{ state, onChange, onClear }}>

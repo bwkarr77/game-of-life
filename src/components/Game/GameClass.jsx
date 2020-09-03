@@ -2,11 +2,22 @@ import React from "react";
 
 import Controls from "./Controls.jsx";
 import Grid from "./Grid.jsx";
-import Settings from "./Settings.jsx";
-import { loadPreset } from "../files/presets.jsx";
-import { loadColorStyling, loadGridSizeG } from "../files/settings.jsx";
+import Settings from "../settings/Settings.jsx";
+import Rules from "../settings/Rules.jsx";
+import { Button } from "semantic-ui-react";
+
+import { loadPreset, presetOptions } from "../files/presets.jsx";
 import {
+  loadColorStyling,
+  loadGridSizeG,
+  colorOptions,
+  gridSizeOptions,
+} from "../files/settings.jsx";
+import {
+  //variables:
+  WORLD_SIZE,
   GEN_TIME,
+  //functions:
   createWorld,
   nextGen,
   randomFill,
@@ -24,8 +35,11 @@ class Game extends React.Component {
     generation: 0,
     isPlaying: false,
     colorStyle: loadColorStyling("greyColor"),
-    gridSize: loadGridSizeG(70),
+    gridSize: loadGridSizeG(WORLD_SIZE),
     genSpeed: 100,
+    showSettings: false,
+    isLoaded: true,
+    rules: { El: 2, Eu: 3, Fl: 3, Fu: 3 },
   };
 
   changeState = (props) => {
@@ -80,10 +94,56 @@ class Game extends React.Component {
     UseStyling(colorStyle);
   };
 
+  onChangeRules = (id, val) => {
+    this.setState({
+      ...this.state,
+      rules: {
+        ...this.state.rules,
+        [id]: parseInt(val),
+      },
+    });
+  };
+
+  onSetRules = (e) => {
+    e.preventDefault();
+    // setRules(this.state.rules); NEED TO CREATE A FUNCTION FOR CHANGING THE RULES
+  };
+
+  onShowSettings = () => {
+    this.setState({
+      showSettings: !this.state.showSettings,
+    });
+  };
+
   render() {
-    console.log("GameClass: ", this.state);
     return (
       <div className="game">
+        <div className="settings-div">
+          <Button
+            id="settings-display"
+            content="Show Settings"
+            onClick={this.onShowSettings}
+          />
+          {this.state.showSettings ? (
+            <div className="rules-settings">
+              <Rules
+                rules={this.state.rules}
+                onChangeRules={this.onChangeRules}
+                load={this.onSetRules}
+              />
+              <Settings
+                isPlaying={this.state.isPlaying}
+                load={this.onSettingStyle}
+                valIn={["cross", "default", WORLD_SIZE, GEN_TIME]}
+                preset={{
+                  presets: presetOptions,
+                  colors: colorOptions,
+                  grid: gridSizeOptions,
+                }}
+              />
+            </div>
+          ) : null}
+        </div>
         <Grid
           world={this.state.world}
           onChange={this.onChange}
@@ -98,7 +158,6 @@ class Game extends React.Component {
           shuffle={this.onShuffle}
           next={this.onNext}
         />
-        <Settings isPlaying={this.state.isPlaying} load={this.onSettingStyle} />
       </div>
     );
   }

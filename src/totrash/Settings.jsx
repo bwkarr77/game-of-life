@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Dropdown, Button } from "semantic-ui-react";
-import Presets from "./Presets.jsx";
+import Presets from "../components/Game/Presets.jsx";
 
 import {
   colorOptions,
   gridSizeOptions,
   generationSpeed,
-} from "../files/settings.jsx";
-import { presetOptions } from "../files/presets.jsx";
+} from "../components/files/settings.jsx";
+
+import { presetOptions } from "../components/files/presets.jsx";
 
 const Settings = (props) => {
   const { load, isPlaying } = props;
 
   const [settings, setSettings] = useState({
     preset: "cross",
-    colorStyle: "purple",
+    colorStyle: "default",
     gridSize: 70,
     generationSpeed: 100,
   });

@@ -1,5 +1,5 @@
 export const colorOptions = [
-  // { key: "test", value: "test", text: "Test" },
+  { key: "default", value: "default", text: "Default" },
   { key: "greyMode", value: "greyMode", text: "Grey Mode" },
   { key: "dayMode", value: "dayMode", text: "Day Mode" },
   { key: "darkMode", value: "darkMode", text: "Dark Mode" },

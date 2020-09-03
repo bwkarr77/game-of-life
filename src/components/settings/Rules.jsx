@@ -1,12 +1,10 @@
 import React from "react";
-import { Button } from "semantic-ui-react";
 
 const Rules = (props) => {
   const { onSubmit, onChangeRules, rules, setRules, isPlaying, load } = props;
-  console.log("Rules,props:", props);
   return (
     <form className="settings" onSubmit={onSubmit}>
-      <div className="settings-sect">
+      <div className="rules-sect">
         <label>El: </label>
         <input
           id="El"
@@ -27,8 +25,8 @@ const Rules = (props) => {
           max="26"
           onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
         />
-      </div>
-      <div className="settings-sect">
+        {/* </div>
+      <div className="rules-sect"> */}
         <label>Fl: </label>
         <input
           id="Fl"
@@ -50,11 +48,11 @@ const Rules = (props) => {
           onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
         />
       </div>
-      <Button
+      {/* <Button
         content="Load Rules"
         onClick={(e) => load(e)}
         disabled={isPlaying}
-      />
+      /> */}
     </form>
   );
 };

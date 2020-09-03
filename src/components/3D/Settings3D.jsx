@@ -13,48 +13,29 @@ import { presetOptions } from "../files/presets3D.jsx";
 import "./styles3D.scss";
 
 const Settings3D = (props) => {
-  console.log("settings3d: ", props);
-  const { isPlaying, styleChange } = props;
+  const { isPlaying, styleChange, valIn } = props;
   // const { gridSize, generationSpeed, colorStyle } = props.state;
 
   const [settings, setSettings] = useState({
-    preset: "",
-    colorStyle: "",
-    gridSize: "",
-    generationSpeed: "",
+    // preset: "plane",
+    // colorStyle: "default",
+    // gridSize: 5,
+    // generationSpeed: 500,
+
+    preset: valIn[0],
+    colorStyle: valIn[1],
+    gridSize: valIn[2],
+    generationSpeed: valIn[3],
   });
 
   const onLoad = () => {
     return styleChange(settings);
   };
 
-  const [rules, setRules] = useState({
-    a: 4,
-    b: 5,
-    c: 5,
-    d: 5,
-  });
-
-  // const onChangeRules = (id, val) => {
-  //   console.log("onChangeRules: ", id, val);
-  //   setRules({
-  //     ...rules,
-  //     [id]: parseInt(val),
-  //   });
-  // };
-
-  // const onChangeRules = (e, value) =>
-  // const onSubmit = (props) => {
-  //   props.preventDefault();
-  //   console.log("onSubmit", rules);
-  // };
-
   return (
     <div className="settings" id="setting-right">
-      {/* <Button as="div" labelPosition="left" className="set-3D-div"> */}
       <div className="settings-sect">
         <Dropdown
-          // styling didn't work until I added <link rel='stylesheet" href='...'/> to the index.html file.
           id="preset"
           placeholder="Select a preset"
           options={presetOptions}

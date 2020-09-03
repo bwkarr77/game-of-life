@@ -3,7 +3,6 @@ import { Button } from "semantic-ui-react";
 // install semantic-ui-css as well
 
 const Controls3D = (props) => {
-  console.log("Controls3D>props: ", props);
   const { isPlaying, play, next, stop } = props;
   return (
     <div>
