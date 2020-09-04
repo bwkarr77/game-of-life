@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ThreePointVis from "./ThreePointVis.jsx";
 import Controls3D from "./Controls3D.jsx";
 import Settings from "../settings/Settings.jsx";
@@ -24,6 +24,7 @@ import {
   grid3DSizeOptions,
   // generationSpeed,
 } from "../files/settings.jsx";
+import UseStyling from "../Game/UseStyling.jsx";
 
 import "./styles3D.scss";
 
@@ -33,10 +34,13 @@ class Game3DClassTest extends React.Component {
     generation: 0,
     isPlaying: false,
     showSettings: false,
+    isLoading: false,
     colorStyle: "default",
     generationSpeed: GEN_TIME_3D,
     gridSize: WORLD_SIZE_3D,
     rules: { El: 5, Eu: 6, Fl: 6, Fu: 6 },
+    //
+    default: {},
   };
 
   changeState = (props) => {
@@ -50,6 +54,7 @@ class Game3DClassTest extends React.Component {
 
   onPlay = () => {
     this.setState({ isPlaying: true });
+    this.setState({ default: this.state });
     this.interval = setInterval(() => {
       this.onNext();
     }, 500);
@@ -64,6 +69,23 @@ class Game3DClassTest extends React.Component {
     clearInterval(this.interval);
   };
 
+  onShuffle = () => {
+    this.changeState({
+      world3D: randomFill(this.state.world3D),
+      generation: 0,
+    });
+  };
+
+  onReset = () => {
+    this.setState(this.state.default);
+    this.onStop();
+    console.log("reset: ", this.state);
+  };
+
+  onClear = () => {
+    this.changeState({ world3D: createWorld(), generation: 0 });
+  };
+
   onSettingStyle = (settings) => {
     const { colorStyle, gridSize, preset, generationSpeed } = settings;
 
@@ -75,18 +97,10 @@ class Game3DClassTest extends React.Component {
       generation: generationSpeed,
       colorStyle: colorStyle,
       gridSize: gridSize,
+      isLoading: !this.state.isLoading,
     });
-  };
 
-  onShuffle = () => {
-    this.changeState({
-      world3D: randomFill(this.state.world3D),
-      generation: 0,
-    });
-  };
-
-  onClear = () => {
-    this.changeState({ world3D: createWorld(), generation: 0 });
+    UseStyling(colorStyle);
   };
 
   onChangeRules = (id, val) => {
@@ -111,6 +125,7 @@ class Game3DClassTest extends React.Component {
   };
 
   render() {
+    console.log("gameclass: ", this.state);
     return (
       <div className="container-3D">
         <div className="settings-div">
@@ -141,7 +156,11 @@ class Game3DClassTest extends React.Component {
           ) : null}
         </div>
         <div className="vis-container">
-          <ThreePointVis world={this.state.world3D} />
+          <ThreePointVis
+            world={this.state.world3D}
+            colorStyle={this.state.colorStyle}
+            size={this.state.world3D.length}
+          />
         </div>
         <p>Generation: {this.state.generation}</p>
         <Controls3D
@@ -151,6 +170,7 @@ class Game3DClassTest extends React.Component {
           stop={this.onStop}
           shuffle={this.onShuffle}
           clear={this.onClear}
+          reset={this.onReset}
         />
       </div>
     );

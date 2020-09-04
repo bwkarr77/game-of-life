@@ -1,6 +1,7 @@
 import React from "react";
 import { changeArray } from "../files/game.jsx";
 import UseStyling from "./UseStyling.jsx";
+import { setGrid } from "../settings/Functions.jsx";
 
 const Grid = (props) => {
   const { world, onChange, colorStyle } = props;
@@ -16,7 +17,11 @@ const Grid = (props) => {
       <div
         key={x}
         className={`cell`}
-        style={{ backgroundColor: cell ? "#424151" : null }}
+        style={{
+          backgroundColor: cell
+            ? setGrid(colorStyle)[0]
+            : setGrid(colorStyle)[1],
+        }}
         onMouseDown={() => changeCell(cell, x, y)}
       />
     );

@@ -3,6 +3,7 @@ export const colorOptions = [
   { key: "greyMode", value: "greyMode", text: "Grey Mode" },
   { key: "dayMode", value: "dayMode", text: "Day Mode" },
   { key: "darkMode", value: "darkMode", text: "Dark Mode" },
+  { key: "random", value: "random", text: "Default with Random Blocks" },
 ];
 
 export const gridSizeOptions = [

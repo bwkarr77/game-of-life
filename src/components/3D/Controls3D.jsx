@@ -3,7 +3,7 @@ import { Button } from "semantic-ui-react";
 // install semantic-ui-css as well
 
 const Controls3D = (props) => {
-  const { isPlaying, play, next, stop } = props;
+  const { isPlaying, play, next, stop, reset, clear, shuffle } = props;
   return (
     <div>
       <div className="controls">
@@ -11,14 +11,14 @@ const Controls3D = (props) => {
           content="Shuffle"
           icon="random"
           labelPosition="right"
-          onClick={props.shuffle}
-          disabled={props.playing}
+          onClick={shuffle}
+          disabled={isPlaying}
         />
         <Button
           content="Clear"
           icon="redo"
           labelPosition="right"
-          onClick={props.clear}
+          onClick={clear}
         />
         <Button
           content="Next"
@@ -26,10 +26,16 @@ const Controls3D = (props) => {
           labelPosition="right"
           onClick={next}
         />
+        <Button
+          content="Reset"
+          icon="redo"
+          labelPosition="right"
+          onClick={reset}
+        />
         {!isPlaying ? (
-          <Button content="Play" icon="redo" onClick={play} />
+          <Button content="Play" icon="play" onClick={play} />
         ) : (
-          <Button content="Stop" icon="redo" onClick={stop} />
+          <Button content="Stop" icon="stop" onClick={stop} />
         )}
       </div>
     </div>

@@ -1,4 +1,5 @@
 const setCustTag = (name, styling, def) => {
+  console.log("setTag: ", name, styling, def);
   const element = document.querySelector(`${name}`);
   element.className = `${def}`;
   if (name === "body") {
