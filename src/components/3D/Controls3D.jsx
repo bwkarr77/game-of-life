@@ -21,16 +21,16 @@ const Controls3D = (props) => {
           onClick={clear}
         />
         <Button
-          content="Next"
-          icon="right arrow"
-          labelPosition="right"
-          onClick={next}
-        />
-        <Button
           content="Reset"
           icon="redo"
           labelPosition="right"
           onClick={reset}
+        />
+        <Button
+          content="Next"
+          icon="right arrow"
+          labelPosition="right"
+          onClick={next}
         />
         {!isPlaying ? (
           <Button content="Play" icon="play" onClick={play} />

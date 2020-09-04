@@ -79,7 +79,7 @@ class Game3DClassTest extends React.Component {
   onReset = () => {
     this.setState(this.state.default);
     this.onStop();
-    console.log("reset: ", this.state);
+    // console.log("reset: ", this.state);
   };
 
   onClear = () => {
@@ -91,6 +91,7 @@ class Game3DClassTest extends React.Component {
 
     setWorldSize(gridSize);
     setSpeed(generationSpeed);
+    setRules(this.state.rules);
 
     this.setState({
       world3D: loadPreset(preset),
@@ -98,6 +99,9 @@ class Game3DClassTest extends React.Component {
       colorStyle: colorStyle,
       gridSize: gridSize,
       isLoading: !this.state.isLoading,
+      // rules: {
+
+      // }
     });
 
     UseStyling(colorStyle);
@@ -125,7 +129,7 @@ class Game3DClassTest extends React.Component {
   };
 
   render() {
-    console.log("gameclass: ", this.state);
+    console.log("gameclass: ", this.state.rules);
     return (
       <div className="container-3D">
         <div className="settings-div">
@@ -139,7 +143,6 @@ class Game3DClassTest extends React.Component {
               <Rules
                 rules={this.state.rules}
                 onChangeRules={this.onChangeRules}
-                load={this.onSetRules}
               />
               <Settings
                 isPlaying={this.state.isPlaying}

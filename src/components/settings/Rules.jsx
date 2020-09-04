@@ -1,7 +1,7 @@
 import React from "react";
 
 const Rules = (props) => {
-  const { onSubmit, onChangeRules, rules, setRules, isPlaying, load } = props;
+  const { onSubmit, onChangeRules, rules, setRules, isPlaying } = props;
   return (
     <form className="settings" onSubmit={onSubmit}>
       <div className="rules-sect">
@@ -12,7 +12,7 @@ const Rules = (props) => {
           className="rule_input"
           value={rules.El}
           min="0"
-          max="26"
+          max={`${rules.Eu}`}
           onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
         />
         <label>Eu: </label>
@@ -21,7 +21,7 @@ const Rules = (props) => {
           type="number"
           className="rule_input"
           value={rules.Eu}
-          min="0"
+          min={`${rules.El}`}
           max="26"
           onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
         />
@@ -34,7 +34,7 @@ const Rules = (props) => {
           className="rule_input"
           value={rules.Fl}
           min="0"
-          max="26"
+          max={`${rules.Fu}`}
           onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
         />
         <label>Fu: </label>
@@ -43,7 +43,7 @@ const Rules = (props) => {
           type="number"
           className="rule_input"
           value={rules.Fu}
-          min="0"
+          min={`${rules.Fl}`}
           max="26"
           onChange={(e, value) => onChangeRules(e.target.id, e.target.value)}
         />

@@ -23,6 +23,7 @@ import {
   randomFill,
   getWorldSize,
   getSpeed,
+  setRules,
 } from "../files/game.jsx";
 
 import UseStyling from "./UseStyling.jsx";
@@ -40,6 +41,8 @@ class Game extends React.Component {
     showSettings: false,
     isLoaded: true,
     rules: { El: 2, Eu: 3, Fl: 3, Fu: 3 },
+    //
+    default: {},
   };
 
   changeState = (props) => {
@@ -76,12 +79,19 @@ class Game extends React.Component {
   onShuffle = () =>
     this.changeState({ world: randomFill(this.state.world), generation: 0 });
 
+  onReset = () => {
+    this.setState(this.state.default);
+    this.onStop();
+    // console.log("reset: ", this.state);
+  };
+
   // loads settings
   onSettingStyle = (settings) => {
     const { gridSize, colorStyle, generationSpeed, preset } = settings;
 
     getWorldSize(gridSize);
     getSpeed(generationSpeed);
+    setRules(this.state.rules);
 
     this.setState({
       colorStyle: colorStyle,

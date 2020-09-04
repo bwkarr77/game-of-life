@@ -113,15 +113,12 @@ export const nextGen = (world) => {
         const alive = aliveNeighbors(world, x, y, z);
         const cell = world[x][y][z];
         // sets the "rules" that determine how the generations persist
-        const El = RULES.El;
-        const Eu = RULES.Eu;
-        const Fl = RULES.Fl;
-        const Fu = RULES.Fu;
-        // 4333 relates to
+
+        // 4333 relates to 3<E<4, 3<F<3
         newWorld[x][y][z] =
           // alive === 6 || (alive === 5 && cell === ALIVE) ? ALIVE : DEAD;
-          (cell === ALIVE && El <= alive && alive <= Eu) ||
-          (cell === DEAD && Fl <= alive && alive <= Fu)
+          (cell === ALIVE && RULES.El <= alive && alive <= RULES.Eu) ||
+          (cell === DEAD && RULES.Fl <= alive && alive <= RULES.Fu)
             ? ALIVE
             : DEAD;
       }
