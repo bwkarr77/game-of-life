@@ -19,11 +19,11 @@ const Rules = () => {
         <p className="rules-p">
           <ul className="generic">
             <li>
-              E<sub>l</sub>&#x2264; E &#8804;<sub>u</sub> = Rules for a LIVING
+              E<sub>l</sub>&#x2264; E &#8804;E<sub>u</sub> = Rules for a LIVING
               cell to stay ALIVE
             </li>
             <li>
-              F<sub>l</sub>&#x2264; F &#8804;<sub>u</sub> = Rules for a DEAD
+              F<sub>l</sub>&#x2264; F &#8804;F<sub>u</sub> = Rules for a DEAD
               cell to become ALIVE
             </li>
             <br />
