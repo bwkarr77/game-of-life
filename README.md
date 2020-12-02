@@ -44,18 +44,23 @@ At each step in time (generation), the following transitions occur for evolution
 </ol>
 
 Conway's Game of Life follows the R=(2333) rules, which compare the behavior of the automaton to real life and can be condensed into the following:
-<ol className="rules-list">
-<li>Any live cell with two or three live neighbours survives.</li>
-<li>Any dead cell with three live neighbours becomes a live cell.</li>
-<li>
-All other live cells die in the next generation. Similarly, all other
-dead cells stay dead.
-</li>
+
+<ol>
+  <li>Any live cell with two or three live neighbours survives.</li>
+  <li>Any dead cell with three live neighbours becomes a live cell.</li>
+  <li>All other live cells die in the next generation. Similarly, all other dead cells stay dead.</li>
 </ol>
 
 ## My Project
 
-This is a project I took on to implement Conway's "Game of Life" (<a href='#more-details'>more details below</a>). A 2D version of the game, and a 3D version of the game was implemented to simulate
+This is a project I took on to implement Conway's "Game of Life" (<a href='#more-details'>more details below</a>). The original Game of Life is based in a 2 dimensional grid to simulate the evolution of generations. My project consists of both a 2D and 3D version of the Game of Life.
+
+In both the 2D and 3D versions of this project, the user can control the settings that the game runs on (the El/Eu/Fl/Fu limits, preset patterns, color style, grid size, generation speed, etc.), and can run the game controls (play, stop, shuffle, etc.). The only real differences between the controls between the 2D and 3D versions are:
+
+<ul>
+<li>2D: allows cells to be clickable by the user.</li>
+<li>3D: allows the cube/grid/world to be rotated for a better view.</li>
+</ul>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
